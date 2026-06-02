@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>LaunchPad – Create New Job</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue: #2563EB;
+      --blue-dark: #1D4ED8;
+      --blue-light: #EFF6FF;
+      --sidebar-bg: #2563EB;
+      --sidebar-active: rgba(255,255,255,0.18);
+      --sidebar-hover: rgba(255,255,255,0.1);
+      --text: #111827;
+      --text-muted: #6B7280;
+      --text-light: #9CA3AF;
+      --border: #E5E7EB;
+      --bg: #F3F4F6;
+      --white: #FFFFFF;
+      --step-done: #2563EB;
+      --step-inactive: #D1D5DB;
+      --tag-bg: #EFF6FF;
+      --tag-text: #2563EB;
+      --green: #16A34A;
+      --radius: 8px;
+      --sidebar-w: 200px;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      font-size: 14px;
+    }
+
+    /* ── SIDEBAR ── */
+    .sidebar {
+      width: var(--sidebar-w);
+      background: var(--sidebar-bg);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      padding: 0;
+      position: fixed;
+      left: 0; top: 0;
+      z-index: 200;
+    }
+    .sidebar-logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 20px 20px 24px;
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+    }
+    .sidebar-logo-text {
+      font-family: "Times New Roman", Times, serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: white;
+      letter-spacing: -0.3px;
+    }
+    .sidebar-nav {
+      flex: 1;
+      padding: 16px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 20px;
+      color: rgba(255,255,255,0.75);
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      border-radius: 0;
+      transition: background 0.15s, color 0.15s;
+      text-decoration: none;
+      position: relative;
+    }
+    .nav-item:hover { background: var(--sidebar-hover); color: white; }
+    .nav-item.active {
+      background: var(--sidebar-active);
+      color: white;
+    }
+    .nav-item.active::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 50%; transform: translateY(-50%);
+      width: 3px; height: 22px;
+      background: white;
+      border-radius: 0 3px 3px 0;
+    }
+    .nav-item svg { width: 18px; height: 18px; flex-shrink: 0; }
+    .sidebar-bottom {
+      padding: 12px 0 20px;
+      border-top: 1px solid rgba(255,255,255,0.12);
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    /* ── MAIN ── */
+    .main {
+      margin-left: var(--sidebar-w);
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* TOP BAR */
+    .topbar {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      height: 58px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 28px;
+      position: sticky; top: 0; z-index: 100;
+    }
+    .topbar-search {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 7px 12px;
+      width: 280px;
+    }
+    .topbar-search svg { width: 16px; height: 16px; color: var(--text-muted); flex-shrink: 0; }
+    .topbar-search input {
+      border: none;
+      background: transparent;
+      outline: none;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      color: var(--text);
+      width: 100%;
+    }
+    .topbar-search input::placeholder { color: var(--text-light); }
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .topbar-bell {
+      width: 34px; height: 34px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+    }
+    .topbar-bell svg { width: 16px; height: 16px; }
+    .topbar-user {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+    }
+    .topbar-avatar {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      background: var(--blue-light);
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 600;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .topbar-uinfo { line-height: 1.3; }
+    .topbar-uname { font-size: 13px; font-weight: 600; }
+    .topbar-urole { font-size: 11px; color: var(--text-muted); }
+    .topbar-caret svg { width: 14px; height: 14px; color: var(--text-muted); }
+
+    /* ── PAGE CONTENT ── */
+    .page {
+      padding: 28px 28px 40px;
+      flex: 1;
+    }
+
+    /* PAGE HEADER */
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .back-link:hover { color: var(--blue); }
+    .back-link svg { width: 14px; height: 14px; }
+    .page-title { font-size: 20px; font-weight: 700; letter-spacing: -0.3px; margin-bottom: 2px; }
+    .page-subtitle { font-size: 13px; color: var(--text-muted); margin-bottom: 24px; }
+
+    /* STEPPER */
+    .stepper {
+      display: flex;
+      align-items: center;
+      margin-bottom: 24px;
+      gap: 0;
+    }
+    .step {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .step-circle {
+      width: 26px; height: 26px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px;
+      font-weight: 600;
+      background: var(--step-inactive);
+      color: white;
+      flex-shrink: 0;
+    }
+    .step.active .step-circle { background: var(--blue); }
+    .step.done .step-circle { background: var(--blue); }
+    .step-name {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+    .step.active .step-name { color: var(--blue); font-weight: 600; }
+    .step-line {
+      flex: 1;
+      height: 1px;
+      background: var(--step-inactive);
+      margin: 0 10px;
+      min-width: 28px;
+    }
+    .step-line.done { background: var(--blue); }
+
+    /* GRID */
+    .content-grid {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 20px;
+      align-items: start;
+    }
+
+    /* FORM PANEL */
+    .form-panel {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 24px;
+    }
+    .form-group { margin-bottom: 18px; }
+    .form-group:last-child { margin-bottom: 0; }
+    .form-label {
+      display: block;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+    .form-input, .form-select, .form-textarea {
+      width: 100%;
+      padding: 9px 12px;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      color: var(--text);
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      outline: none;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    .form-input:focus, .form-select:focus, .form-textarea:focus {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
+    }
+    .form-select {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%236B7280' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      padding-right: 32px;
+      cursor: pointer;
+    }
+    .form-textarea { resize: vertical; min-height: 100px; line-height: 1.55; }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    /* DESCRIPTION TOOLBAR */
+    .desc-toolbar {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      padding: 5px 8px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-bottom: none;
+      border-radius: 6px 6px 0 0;
+    }
+    .desc-toolbar button {
+      background: none;
+      border: none;
+      padding: 4px 7px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+      font-family: 'Inter', sans-serif;
+      transition: background 0.12s;
+      display: flex; align-items: center;
+    }
+    .desc-toolbar button:hover { background: var(--border); color: var(--text); }
+    .desc-toolbar .sep { width: 1px; height: 16px; background: var(--border); margin: 0 2px; }
+    .desc-toolbar + .form-textarea {
+      border-top: none;
+      border-radius: 0 0 6px 6px;
+    }
+
+    /* LOCATION ROW with icon */
+    .input-icon-wrap {
+      position: relative;
+    }
+    .input-icon-wrap .form-input { padding-right: 34px; }
+    .input-icon-wrap svg {
+      position: absolute;
+      right: 10px; top: 50%; transform: translateY(-50%);
+      width: 15px; height: 15px;
+      color: var(--text-light);
+      pointer-events: none;
+    }
+
+    /* TAGS */
+    .tags-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      padding: 8px 10px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      min-height: 40px;
+      cursor: text;
+      background: var(--white);
+      transition: border-color 0.15s, box-shadow 0.15s;
+      align-items: center;
+    }
+    .tags-wrap:focus-within {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
+    }
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: var(--tag-bg);
+      color: var(--tag-text);
+      font-size: 12px;
+      font-weight: 500;
+      padding: 3px 8px;
+      border-radius: 4px;
+    }
+    .tag-remove {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--tag-text);
+      font-size: 13px;
+      line-height: 1;
+      padding: 0;
+      opacity: 0.6;
+    }
+    .tag-remove:hover { opacity: 1; }
+    .tag-input {
+      border: none; outline: none;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px; color: var(--text);
+      background: transparent;
+      min-width: 70px; flex: 1;
+    }
+    .field-hint { font-size: 11px; color: var(--text-light); margin-top: 4px; }
+
+    /* FORM FOOTER */
+    .form-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 18px;
+      margin-top: 18px;
+      border-top: 1px solid var(--border);
+    }
+    .autosave {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 12px;
+      color: var(--green);
+    }
+    .autosave svg { width: 13px; height: 13px; }
+    .btn-draft {
+      background: var(--white);
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      transition: background 0.15s;
+    }
+    .btn-draft:hover { background: var(--bg); }
+    .btn-next {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--blue);
+      color: white;
+      border: none;
+      padding: 9px 18px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      transition: background 0.15s;
+    }
+    .btn-next:hover { background: var(--blue-dark); }
+    .btn-next svg { width: 15px; height: 15px; }
+    .footer-btns { display: flex; gap: 10px; align-items: center; }
+
+    /* ── PREVIEW PANEL ── */
+    .preview-panel {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      position: sticky;
+      top: 78px;
+    }
+    .preview-top {
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .preview-top-label { font-size: 13px; font-weight: 600; }
+    .preview-top-link {
+      font-size: 12px;
+      color: var(--blue);
+      cursor: pointer;
+      font-weight: 500;
+    }
+    .preview-body { padding: 16px 18px; }
+
+    .prev-company-row {
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 12px;
+    }
+    .prev-job-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.3;
+    }
+    .prev-company-name {
+      font-size: 12px;
+      color: var(--blue);
+      font-weight: 500;
+      margin-top: 2px;
+    }
+
+    .prev-chips {
+      display: flex; flex-wrap: wrap; gap: 6px;
+      margin-bottom: 12px;
+    }
+    .pchip {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 11px;
+      font-weight: 500;
+      padding: 3px 9px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+    }
+    .pchip.blue {
+      background: #FEF3C7;
+      color: #92400E;
+      border-color: transparent;
+      font-weight: 600;
+    }
+    .pchip svg { width: 11px; height: 11px; }
+
+    .prev-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 12px;
+    }
+    .prev-skills {
+      display: flex; flex-wrap: wrap; gap: 5px;
+      margin-bottom: 14px;
+    }
+    .prev-skill {
+      font-size: 11px;
+      font-weight: 500;
+      background: var(--bg);
+      color: var(--text);
+      padding: 3px 9px;
+      border-radius: 4px;
+    }
+    .prev-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+    }
+    .prev-salary-label { font-size: 11px; color: var(--text-muted); margin-bottom: 2px; }
+    .prev-salary-val { font-size: 13px; font-weight: 600; color: var(--text); }
+    .prev-apply {
+      background: var(--blue);
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+    }
+    .prev-apply:hover { background: var(--blue-dark); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .content-grid { grid-template-columns: 1fr; }
+      .preview-panel { position: static; }
+    }
+    @media (max-width: 700px) {
+      .sidebar { display: none; }
+      .main { margin-left: 0; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════ SIDEBAR ═══════════ -->
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <span class="sidebar-logo-text">LaunchPad</span>
+  </div>
+
+  <nav class="sidebar-nav">
+    <a class="nav-item" href="#">
+      <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M3 12L12 4l9 8v8a1 1 0 01-1 1h-5v-5H9v5H4a1 1 0 01-1-1v-8z"/></svg>
+      Home
+    </a>
+    <a class="nav-item active" href="#">
+      <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg>
+      Jobs
+    </a>
+    <a class="nav-item" href="#">
+      <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/><path d="M16 3.13a4 4 0 010 7.75"/><path d="M21 21v-2a4 4 0 00-3-3.87"/></svg>
+      Applicants
+    </a>
+    <a class="nav-item" href="#">
+      <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M4 6h16M4 12h10M4 18h7"/></svg>
+      Pipeline
+    </a>
+    <a class="nav-item" href="#">
+      <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+      Message
+    </a>
+    <a class="nav-item" href="#">
+      <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+      Company Profile
+    </a>
+    <a class="nav-item" href="#">
+      <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+      Settings
+    </a>
+  </nav>
+
+  <div class="sidebar-bottom">
+    <a class="nav-item" href="#">
+      <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+      Help &amp; Support
+    </a>
+    <a class="nav-item" href="#">
+      <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"/></svg>
+      Logout
+    </a>
+  </div>
+</aside>
+
+<!-- ═══════════ MAIN ═══════════ -->
+<div class="main">
+
+  <!-- TOP BAR -->
+  <header class="topbar">
+    <div class="topbar-search">
+      <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+      <input type="text" placeholder="Search applicants, jobs, tasks..."/>
+    </div>
+    <div class="topbar-right">
+      <div class="topbar-bell">
+        <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
+      </div>
+      <div class="topbar-user">
+        <div class="topbar-avatar">SJ</div>
+        <div class="topbar-uinfo">
+          <div class="topbar-uname">Sarah Johnson</div>
+          <div class="topbar-urole">Admin</div>
+        </div>
+        <div class="topbar-caret">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- PAGE -->
+  <div class="page">
+
+    <a class="back-link" href="#">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+      Back
+    </a>
+    <h1 class="page-title">Create New Job</h1>
+    <p class="page-subtitle">Fill in the details to post a new job opening</p>
+
+    <!-- STEPPER -->
+    <div class="stepper">
+      <div class="step active">
+        <div class="step-circle">1</div>
+        <span class="step-name">Job Details</span>
+      </div>
+      <div class="step-line"></div>
+      <div class="step">
+        <div class="step-circle">2</div>
+        <span class="step-name">Requirements</span>
+      </div>
+      <div class="step-line"></div>
+      <div class="step">
+        <div class="step-circle">3</div>
+        <span class="step-name">Compensation</span>
+      </div>
+      <div class="step-line"></div>
+      <div class="step">
+        <div class="step-circle">4</div>
+        <span class="step-name">Preview</span>
+      </div>
+    </div>
+
+    <!-- CONTENT -->
+    <div class="content-grid">
+
+      <!-- FORM -->
+      <div class="form-panel">
+
+        <div class="form-group">
+          <label class="form-label">Job Title</label>
+          <input class="form-input" type="text" id="job-title" placeholder="Frontend Intern" value="Frontend Intern" oninput="syncPreview()"/>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Job Type</label>
+            <select class="form-select" id="job-type" onchange="syncPreview()">
+              <option>Full-time</option>
+              <option selected>Internship</option>
+              <option>Part-time</option>
+              <option>Contract</option>
+              <option>Remote</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Location</label>
+            <div class="input-icon-wrap">
+              <input class="form-input" type="text" id="location" placeholder="Lagos, Nigeria" value="Lagos, Nigeria" oninput="syncPreview()"/>
+              <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Job Description</label>
+          <div class="desc-toolbar">
+            <button onclick="document.execCommand('bold')"><b>B</b></button>
+            <button onclick="document.execCommand('italic')"><i style="font-style:italic">I</i></button>
+            <button onclick="document.execCommand('underline')"><u>U</u></button>
+            <div class="sep"></div>
+            <button onclick="document.execCommand('insertUnorderedList')">
+              <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="9" y1="6" x2="20" y2="6"/><line x1="9" y1="12" x2="20" y2="12"/><line x1="9" y1="18" x2="20" y2="18"/><circle cx="4" cy="6" r="1.5" fill="currentColor"/><circle cx="4" cy="12" r="1.5" fill="currentColor"/><circle cx="4" cy="18" r="1.5" fill="currentColor"/></svg>
+            </button>
+            <button>
+              <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
+            </button>
+          </div>
+          <textarea class="form-textarea" id="job-desc" oninput="syncPreview()">We're looking for a passionate Frontend Intern to join our team. You'll work on real world projects using React and Tailwind CSS, collaborating with designers and senior engineers to build pixel-perfect interfaces.</textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Skills / Tags</label>
+          <div class="tags-wrap" id="tags-wrap" onclick="document.getElementById('tag-input').focus()">
+            <span class="tag" data-skill="React">React <button class="tag-remove" onclick="removeTag(this)" type="button">×</button></span>
+            <span class="tag" data-skill="Tailwind CSS">Tailwind CSS <button class="tag-remove" onclick="removeTag(this)" type="button">×</button></span>
+            <span class="tag" data-skill="JavaScript">JavaScript <button class="tag-remove" onclick="removeTag(this)" type="button">×</button></span>
+            <input class="tag-input" id="tag-input" type="text" placeholder="Add skill..." onkeydown="handleTag(event)"/>
+          </div>
+          <p class="field-hint">Press Enter or comma to add</p>
+        </div>
+
+        <div class="form-footer">
+          <div class="autosave">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            Autosaved a few seconds ago
+          </div>
+          <div class="footer-btns">
+            <button class="btn-draft">Save as Draft</button>
+            <button class="btn-next">
+              Next step
+              <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- PREVIEW -->
+      <div class="preview-panel">
+        <div class="preview-top">
+          <span class="preview-top-label">Live Preview</span>
+          <span class="preview-top-link">How seekers see this</span>
+        </div>
+        <div class="preview-body">
+          <div class="prev-company-row">
+            <div>
+              <div class="prev-job-title" id="prev-title">Frontend Intern</div>
+              <div class="prev-company-name">Paystack</div>
+            </div>
+          </div>
+
+          <div class="prev-chips" id="prev-chips">
+            <span class="pchip">
+              <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Lagos, Nigeria · Remote
+            </span>
+            <span class="pchip blue">Internship</span>
+          </div>
+
+          <div class="prev-skills" id="prev-skills">
+            <span class="prev-skill">React</span>
+            <span class="prev-skill">Tailwind CSS</span>
+            <span class="prev-skill">JavaScript</span>
+          </div>
+
+          <div class="prev-desc" id="prev-desc">
+            We're looking for a passionate Frontend Intern to join our team. You'll work on real world projects using React and Tailwind CSS, collaborating with designers and senior engineers to build pixel-perfect interfaces.
+          </div>
+
+          <div class="prev-footer">
+            <div>
+              <div class="prev-salary-label">Estimated Salary</div>
+              <div class="prev-salary-val" id="prev-salary">Competitive</div>
+            </div>
+            <button class="prev-apply">Apply Now</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  function syncPreview() {
+    const title = document.getElementById('job-title').value;
+    const type = document.getElementById('job-type').value;
+    const loc = document.getElementById('location').value;
+    const desc = document.getElementById('job-desc').value;
+
+    document.getElementById('prev-title').textContent = title || 'Job Title';
+    document.getElementById('prev-desc').textContent = desc || 'Description will appear here...';
+
+    const chips = document.getElementById('prev-chips');
+    chips.innerHTML = '';
+    if (loc) {
+      chips.innerHTML += `<span class="pchip"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" width="11" height="11"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1118 0z"/><circle cx="12" cy="10" r="3"/></svg>${loc}</span>`;
+    }
+    if (type) {
+      chips.innerHTML += `<span class="pchip blue">${type}</span>`;
+    }
+
+    updateSkills();
+  }
+
+  function updateSkills() {
+    const tags = document.querySelectorAll('#tags-wrap .tag');
+    const container = document.getElementById('prev-skills');
+    container.innerHTML = '';
+    tags.forEach(t => {
+      const s = document.createElement('span');
+      s.className = 'prev-skill';
+      s.textContent = t.dataset.skill;
+      container.appendChild(s);
+    });
+  }
+
+  function handleTag(e) {
+    const input = document.getElementById('tag-input');
+    if (e.key === 'Enter' || e.key === ',') {
+      e.preventDefault();
+      const val = input.value.trim().replace(/,/g, '');
+      if (val) { addTag(val); input.value = ''; updateSkills(); }
+    }
+    if (e.key === 'Backspace' && input.value === '') {
+      const tags = document.querySelectorAll('#tags-wrap .tag');
+      if (tags.length) { tags[tags.length - 1].remove(); updateSkills(); }
+    }
+  }
+
+  function addTag(text) {
+    const wrap = document.getElementById('tags-wrap');
+    const input = document.getElementById('tag-input');
+    const tag = document.createElement('span');
+    tag.className = 'tag';
+    tag.dataset.skill = text;
+    tag.innerHTML = `${text} <button class="tag-remove" onclick="removeTag(this)" type="button">×</button>`;
+    wrap.insertBefore(tag, input);
+  }
+
+  function removeTag(btn) {
+    btn.parentElement.remove();
+    updateSkills();
+  }
+</script>
+</body>
+</html>
