@@ -1,0 +1,247 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: "DM Sans", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-x: hidden;
+}
+.main_container {
+  display: flex;
+  max-width: 1440px;
+  width: 100%;
+  justify-content: center;
+}
+.container1 {
+  max-width: 685px;
+  width: 100%;
+  background-color: #1d4edb;
+  color: #ffff;
+  padding: 45px;
+  position: sticky;
+  top: 0;
+}
+.container1 .logo {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.logo h1 {
+  font-size: 32px;
+}
+.container1 .logo img {
+}
+.container1 .side-img {
+  width: 500px;
+  height: 500px;
+  margin-top: 75px;
+}
+.container1 .footer h2 {
+  margin-top: 30px;
+  margin-bottom: 10px;
+  font-size: 32px;
+  gap: 10px;
+  font-family: "DM Serif Display";
+  line-height: 40px;
+  font-weight: 400;
+}
+.container1 .footer p {
+  width: 507px;
+  font-size: 16px;
+  line-height: 100%;
+  font-weight: 300;
+  /* padding: 0px 40px; */
+}
+.container2 {
+  max-width: 755px;
+  width: 100%;
+  padding: 67px 96px;
+  position: relative;
+}
+.container2 .greetings {
+  padding: 8px 10px;
+  width: 110px;
+  height: 31px;
+  border-radius: 32px;
+  background-color: #2563eb1a;
+  color: #1d4edb;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 100%;
+  align-self: center;
+}
+.container2 h1 {
+  font-family: "DM Serif Display";
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 40px;
+}
+.container2 p:first-of-type {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 100%;
+}
+.container2 .opt {
+  width: 121px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+.container2 .sign_btn {
+  width: 555px;
+  height: 65px;
+  border-radius: 12px;
+  border: 1px solid #8a8a8a;
+  background-color: #2563eb1a;
+  padding: 5px;
+  display: flex;
+  gap: 5px;
+}
+.sign_btn button {
+  width: 270px;
+  height: 55px;
+  border-radius: 8px;
+  padding: 10px;
+  border: none;
+  font-weight: 600;
+  font-size: 16px;
+}
+.sign_btn button:nth-child(1) {
+  background-color: #1d4edb;
+  color: #ffff;
+}
+.sign_btn button:nth-child(2):hover {
+  background-color: #1d4edb;
+  color: #ffff;
+}
+/*  */
+.name {
+  display: flex;
+  gap: 20px;
+  max-width: 555px;
+  width: 100%;
+}
+
+.name .first_name,
+.last_name {
+  display: flex;
+  flex-direction: column;
+  margin: px 0px;
+  width: 275px;
+}
+.container2 .email,
+.password {
+  width: 563px;
+  height: 106px;
+  margin: 4px 0px;
+  display: flex;
+  flex-direction: column;
+}
+.first_name label,
+.last_name label,
+.email label,
+.password label {
+  width: 114px;
+  height: 40px;
+  padding: 10px 0px;
+}
+.first_name input,
+.last_name input,
+.email input,
+.password input {
+  height: 62px;
+  width: 100%;
+  padding: 20px 15px;
+  border-radius: 8px;
+  border: 1px solid #00000047;
+}
+input::placeholder {
+  font-size: 17px;
+}
+.password {
+  position: relative;
+}
+.password img {
+  position: absolute;
+  top: 65px;
+  right: 10px;
+}
+.container2 .forgot-password {
+  float: right;
+  text-decoration: none;
+  color: #1d4edb;
+  background-color: #2563eb1a;
+  border-radius: 5px;
+}
+.container2 a {
+  text-decoration: none;
+  color: #1d4edb;
+}
+.terms {
+  margin-top: 40px;
+  height: 20px;
+  display: flex;
+  gap: 10px;
+  font-size: 14px;
+}
+.container2 .sign-up {
+  width: 100%;
+  padding: 20px 10px;
+  margin-top: 20px;
+  border-radius: 12px;
+  background-color: #2563eb;
+  border: none;
+  color: #ffff;
+  cursor: pointer;
+  box-shadow: 0 10px 40px 3px #00000047;
+  transition: 0.2s ease-in-out;
+}
+.container2 .sign-up:hover {
+  /* background-color: transparent;
+  border: 1px solid #1d4edb;
+  color: #1d4edb; */
+  transform: translateY(-7px);
+}
+.f-line,
+.l-line {
+  width: 200px;
+  height: 0px;
+  border: 1px solid #00000047;
+}
+.line p {
+  color: #00000080;
+  font-size: 14px;
+}
+.line {
+  display: flex;
+  margin: 40px 0px;
+  align-items: center;
+  gap: 20px;
+}
+.acc_icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 39px;
+}
+.acc_icon div {
+  width: 62px;
+  height: 62px;
+  border: 1px solid #00000047;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.signup {
+  text-align: center;
+  margin-top: 40px;
+  font-weight: 500px;
+}

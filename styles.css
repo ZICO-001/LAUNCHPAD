@@ -18,6 +18,7 @@ header {
   margin: 30px;
   border-bottom: 1px solid rgba(128, 128, 128, 0.137);
 }
+
 .logo {
   display: flex;
   align-items: center;
@@ -53,6 +54,13 @@ a.home {
   display: flex;
   gap: 33px;
 }
+.nav-btn a {
+  text-decoration: none;
+  color: #1d4edb;
+}
+.nav-btn .signup {
+  color: #ffff;
+}
 .nav-btn button {
   width: 147px;
   height: 61px;
@@ -68,14 +76,26 @@ a.home {
   color: #fff;
 }
 
-.nav-btn button:hover {
+.nav-btn button:hover a {
   background-color: #1d4edb;
   color: #fff;
 }
-.nav-btn button:nth-child(2):hover {
+.responsive-nav {
+  display: flex;
+  display: none;
+  flex-direction: column;
+  position: absolute;
+  right: 0;
+
+  width: 80px;
+  background-color: #1d4edb;
+  height: 100%;
+}
+.nav-btn button:nth-child(2):hover,
+a:hover {
   border: 1px solid #1d4edb;
   background-color: #fff;
-  color: #1d4edb;
+  /* color: #1d4edb; */
 }
 .main-content {
   margin: 80px 32px 0px;
