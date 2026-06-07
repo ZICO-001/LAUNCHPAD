@@ -19,7 +19,6 @@ body {
   overflow: hidden;
 }
 /*  */
-/* Animation */
 
 .container1,
 .container2 {
@@ -31,7 +30,7 @@ body {
 /* Page enters from right on load */
 @keyframes slideInRight {
   from {
-    transform: translateX(-100%);
+    transform: translateX(100%);
     opacity: 0;
   }
   to {
@@ -43,7 +42,7 @@ body {
 /* Page enters from left on load */
 @keyframes slideInLeft {
   from {
-    transform: translateX(100%);
+    transform: translateX(-100%);
     opacity: 0;
   }
   to {
@@ -52,7 +51,6 @@ body {
   }
 }
 
-/* Container1 (blue panel) comes from the LEFT */
 .animate-in-right .container1 {
   animation: slideInLeft 0.5s cubic-bezier(0.77, 0, 0.18, 1) forwards;
 }
@@ -165,6 +163,13 @@ body {
   display: flex;
   gap: 5px;
 }
+/* animation */
+.container1,
+.container2 {
+  transition:
+    transform 0.5s cubic-bezier(0.77, 0, 0.18, 1),
+    opacity 0.5s ease;
+}
 .sign_btn button {
   width: 270px;
   height: 55px;
@@ -206,6 +211,7 @@ input {
   flex-direction: column;
 }
 .first_name label,
+.text label,
 .last_name label,
 .email label,
 .password label {
@@ -213,12 +219,15 @@ input {
   height: 40px;
   padding: 10px 0px;
 }
+
 .first_name input,
 .last_name input,
 .email input,
-.password input {
+.password input,
+.text input {
   height: 62px;
   width: 100%;
+  margin-top: 5px;
   padding: 20px 15px;
   border-radius: 8px;
   border: 1px solid #00000047;
@@ -308,4 +317,8 @@ input::placeholder {
   text-align: center;
   margin-top: 40px;
   font-weight: 500px;
+}
+.sign_btn button.active {
+  background-color: #1d4edb;
+  color: #fff;
 }

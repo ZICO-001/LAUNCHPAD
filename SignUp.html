@@ -34,30 +34,51 @@
         <p>Enter your credentials to access verified internships & jobs.</p>
         <p class="opt">Sign In as a/an</p>
         <div class="sign_btn">
-          <button type="button">Job Seeker</button>
-          <button type="button">Employer</button>
+          <button type="button" id="jobSeekerBtn">Job Seeker</button>
+          <button type="button" id="employerBtn">Employer</button>
         </div>
-        <form action="">
+        <form action="" id="signUpForm">
           <div class="name">
             <div class="first_name">
               <label for="text">First Name</label>
-              <input type="text" name="" id="" placeholder="e.g Tunde" />
+              <input
+                type="text"
+                name=""
+                id="firstName"
+                placeholder="e.g Tunde"
+              />
             </div>
             <div class="last_name">
               <label for="text">Last Name</label>
-              <input type="text" name="" id="" placeholder="e.g Adeleke" />
+              <input
+                type="text"
+                name=""
+                id="lastName"
+                placeholder="e.g Adeleke"
+              />
             </div>
           </div>
 
           <div class="email">
             <label for="email">Email Address</label>
-            <input type="email" name="" id="" placeholder="Enter email" />
+            <input type="email" name="" id="email" placeholder="Enter email" />
           </div>
           <div class="password">
             <label for="password">Password</label>
-            <input type="password" name="" id="" placeholder="Enter password" />
+            <input
+              type="password"
+              name=""
+              id="password"
+              placeholder="Enter password"
+            />
             <img
               src="loginImages/password-icon.png"
+              alt=""
+              width="25px"
+              height="20px"
+            />
+            <img
+              src="loginImages/password-icon-open.png"
               alt=""
               width="25px"
               height="15px"
@@ -65,14 +86,14 @@
           </div>
           <a href="#" class="forgot-password">forgot password?</a>
           <div class="terms">
-            <input type="checkbox" name="" id="" />
+            <input type="checkbox" name="" id="termsCheckbox" />
             <label for="checkbox"
               >I agree to the <a href="">Terms Of Service</a> and
               <a href="#">Privacy Policy</a></label
             >
           </div>
 
-          <button type="button" class="sign-up">Sign Up</button>
+          <button type="button" class="sign-up" id="signUpBtn">Sign Up</button>
         </form>
         <div class="line">
           <div class="f-line"></div>
@@ -88,11 +109,11 @@
           </div>
         </div>
         <p class="signup">
-          Already have an account?<a href="Signin.html" target="_blank">
-            Sign In</a
-          >
+          Already have an account?<a href="Signin.html"> Sign In</a>
         </p>
       </div>
     </div>
+
+    <script src="SignUp.js"></script>
   </body>
 </html>

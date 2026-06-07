@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="SignIn.css" />
+    <link rel="stylesheet" href="Employer-signup.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -21,31 +21,71 @@
         </div>
         <img src="loginImages/signin-image.png" alt="" class="side-img" />
         <div class="footer">
-          <h2>
-            Connect with top-tier talent or find your next career milestone.
-          </h2>
+          <h2>Verified internship & job built for beginners like you.</h2>
           <p>
-            Our recruitment portal streamlines the hiring process for both
-            employers and job seekers with data-driven insights and professional
-            matching.
+            Join thousands of talent and find your next career influence. <br />
+            Access exclusive oppurtunities tailored for your growth
           </p>
         </div>
       </div>
       <div class="container2">
-        <p class="greetings">Welcome back 👋</p>
-        <h1>Sign into your account</h1>
-        <p>Enter your credentials to access your recruitment dashboard.</p>
+        <p class="greetings">Get Started</p>
+        <h1>Create your account</h1>
+        <p>Enter your credentials to access verified internships & jobs.</p>
         <p class="opt">Sign In as a/an</p>
         <div class="sign_btn">
           <button type="button" id="jobSeekerBtn">Job Seeker</button>
           <button type="button" id="employerBtn">Employer</button>
         </div>
-        <form action="" id="signInForm">
-          <div class="email" id="signInEmail">
+        <form action="" id="signUpForm">
+          <div class="name">
+            <div class="first_name">
+              <label for="text">First Name</label>
+              <input
+                type="text"
+                name=""
+                id="firstName"
+                placeholder="e.g Sarah"
+              />
+            </div>
+            <div class="last_name">
+              <label for="text">Last Name</label>
+              <input
+                type="text"
+                name=""
+                id="lastName"
+                placeholder="e.g Adetoyin"
+              />
+            </div>
+          </div>
+
+          <div class="email">
             <label for="email">Email Address</label>
-            <input type="email" name="" id="" placeholder="Enter email" />
+            <input
+              type="email"
+              name=""
+              id="email"
+              placeholder="Enter work email"
+            />
+          </div>
+
+          <div class="email" id="">
+            <label for="text">Your Role</label>
+            <input
+              type="email"
+              name=""
+              id="field-group"
+              placeholder="e.g. HR Manager, Recruiter"
+            />
           </div>
           <div class="password">
+            <label for="password">Password</label>
+            <input
+              type="password"
+              name=""
+              id="password"
+              placeholder="Enter password"
+            />
             <img
               src="loginImages/password-icon.png"
               alt=""
@@ -57,27 +97,20 @@
               alt=""
               width="25px"
               height="15px"
-              id="passwordToggle"
-            /><label for="password">Password</label>
-            <input
-              type="password"
-              name=""
-              id=""
-              placeholder="Enter password"
-              class="input-password"
-              id="signInPassword"
             />
           </div>
           <a href="#" class="forgot-password">forgot password?</a>
           <div class="terms">
-            <input type="checkbox" name="" id="" id="termsCheckbox" />
+            <input type="checkbox" name="" id="termsCheckbox" />
             <label for="checkbox"
               >I agree to the <a href="">Terms Of Service</a> and
               <a href="#">Privacy Policy</a></label
             >
           </div>
 
-          <button type="button" class="sign-In" id="signInBtn">Sign In</button>
+          <button type="button" class="sign-up active" id="signUpBtn">
+            Sign Up
+          </button>
         </form>
         <div class="line">
           <div class="f-line"></div>
@@ -93,12 +126,11 @@
           </div>
         </div>
         <p class="signup">
-          Don't have an account?<a href="SignUp.html" target="_blank">
-            Sign Up</a
-          >
+          Already have an account?<a href="Signin.html"> Sign In</a>
         </p>
       </div>
     </div>
-    <script src="SignIn.js"></script>
+
+    <script src="Employer-signup.js"></script>
   </body>
 </html>

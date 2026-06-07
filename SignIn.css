@@ -15,6 +15,64 @@ body {
   max-width: 1440px;
   width: 100%;
   justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.container1,
+.container2 {
+  transition:
+    transform 0.5s cubic-bezier(0.77, 0, 0.18, 1),
+    opacity 0.5s ease;
+}
+
+/* Page enters from right on load */
+@keyframes slideInRight {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Page enters from left on load */
+@keyframes slideInLeft {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Container1 (blue panel) comes from the LEFT */
+.animate-in-right .container1 {
+  animation: slideInLeft 0.5s cubic-bezier(0.77, 0, 0.18, 1) forwards;
+}
+
+/* Container2 (form panel) comes from the RIGHT */
+.animate-in-right .container2 {
+  animation: slideInRight 0.5s cubic-bezier(0.77, 0, 0.18, 1) forwards;
+}
+
+/* Container1 (blue panel) comes from the RIGHT */
+.animate-in-left .container1 {
+  animation: slideInRight 0.5s cubic-bezier(0.77, 0, 0.18, 1) forwards;
+}
+
+/* Container2 (form panel) comes from the LEFT */
+.animate-in-left .container2 {
+  animation: slideInLeft 0.5s cubic-bezier(0.77, 0, 0.18, 1) forwards;
+}
+
+.sign_btn button.active {
+  background-color: #1d4edb;
+  color: #fff;
 }
 .container1 {
   max-width: 685px;
@@ -108,11 +166,10 @@ body {
   font-weight: 600;
   font-size: 16px;
 }
-.sign_btn button:nth-child(1) {
-  background-color: #1d4edb;
-  color: #ffff;
+.password img:last-of-type {
+  display: none;
 }
-.sign_btn button:nth-child(2):hover {
+.sign_btn button:hover {
   background-color: #1d4edb;
   color: #ffff;
 }
