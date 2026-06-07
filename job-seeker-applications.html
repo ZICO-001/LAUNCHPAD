@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LaunchPad - My Applications</title>
+  <link rel="stylesheet" href="job-seeker-applications.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+</head>
+<body>
+
+  <div class="dashboard-container">
+    
+    <aside class="sidebar">
+      <div class="logo-container">
+        <img class="logo-icon" src="images/launchpad logo.png" alt="LaunchPad logo">
+        <h1 class="logo-text">LaunchPad</h1>
+      </div>
+      
+      <nav class="sidebar-nav">
+        <a href="#" class="nav-item">
+          <span class="material-symbols-outlined">home</span>
+          <span>Home</span>
+        </a>
+        <a href="#" class="nav-item">
+          <span class="material-symbols-outlined">search</span>
+          <span>Browse Jobs</span>
+        </a>
+        <a href="#" class="nav-item">
+          <span class="material-symbols-outlined">bookmark</span>
+          <span>Saved Jobs</span>
+        </a>
+        <a href="#" class="nav-item">
+          <span class="material-symbols-outlined">work</span>
+          <span>My Applications</span>
+        </a>
+        <a href="#" class="nav-item">
+          <span class="material-symbols-outlined">person</span>
+          <span>Profile</span>
+        </a>
+      </nav>
+
+      <div class="profile-card">
+        <div class="profile-card-header">
+          <span class="material-symbols-outlined progress-icon">assessment</span>
+          <h3>Level up your profile</h3>
+        </div>
+        <p>Complete your profile to get more interview calls.</p>
+        <div class="progress-bar-container">
+          <div class="progress-bar" style="width: 60%;"></div>
+        </div>
+        <div class="progress-footer">
+          <span>60% complete</span>
+          <a href="#" class="complete-link">Complete Profile &rarr;</a>
+        </div>
+      </div>
+
+      <div class="sidebar-footer">
+        <button class="logout-btn">
+          <span class="material-symbols-outlined">logout</span>
+          <span>Logout</span>
+        </button>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      
+      <header class="top-nav">
+        <div class="mobile-menu-toggle" id="menuToggle">
+          <span class="material-symbols-outlined">menu</span>
+        </div>
+        
+        <div class="search-container">
+          <span class="material-symbols-outlined search-icon">search</span>
+          <input type="text" id="jobSearch" placeholder="Search jobs, companies or skills....">
+        </div>
+        
+        <div class="user-actions">
+          <button class="notification-btn">
+            <span class="material-symbols-outlined">notifications</span>
+          </button>
+          <div class="user-profile-dropdown">
+            <div class="avatar">TA</div>
+            <div class="user-info">
+              <span class="user-name">Tunde Adeleke <span class="arrow-down">&#9662;</span></span>
+              <span class="user-role">Job Seeker</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <div class="content-body">
+        <div class="page-title-section">
+          <h2>My Applications</h2>
+          <p>Track the status of your job application in real time</p>
+        </div>
+
+        <div class="tabs-container">
+          <button class="tab-button active" data-status="all">All (<span id="count-all">0</span>)</button>
+          <button class="tab-button" data-status="under-review">Under Review (<span id="count-review">0</span>)</button>
+          <button class="tab-button" data-status="interview">Interview (<span id="count-interview">0</span>)</button>
+          <button class="tab-button" data-status="offered">Offered (<span id="count-offered">0</span>)</button>
+          <button class="tab-button" data-status="rejected">Rejected (<span id="count-rejected">0</span>)</button>
+        </div>
+
+        <section class="applications-container" id="applicationsContainer">
+          </section>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="job-seeker-applications.js"></script>
+</body>
+</html>
