@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LaunchPad – Jobs</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="employersjob.css" />
+  </head>
+  <body>
+    <aside class="sidebar" aria-label="Primary navigation">
+      <a class="sidebar-logo" href="#" aria-label="LaunchPad home">
+        <span class="sidebar-logo-mark" aria-hidden="true">
+          <img src="https://res.cloudinary.com/dl77jmg2u/image/upload/v1780801528/logo_m1j3si.jpg" alt="" />
+        </span>
+        <span class="sidebar-logo-text">LaunchPad</span>
+      </a>
+
+      <nav class="sidebar-nav" aria-label="Main menu">
+        <a class="nav-item" href="#">
+          <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M3 12 12 4l9 8v8a1 1 0 0 1-1 1h-5v-5H9v5H4a1 1 0 0 1-1-1v-8z" />
+          </svg>
+          Home
+        </a>
+        <a class="nav-item active" href="#" aria-current="page">
+          <img
+            class="nav-img nav-img-job"
+            src="https://res.cloudinary.com/dl77jmg2u/image/upload/v1780801715/job_icon_vybrj2.jpg"
+            alt=""
+            aria-hidden="true"
+          />
+          Jobs
+        </a>
+        <a class="nav-item" href="#">
+          <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="9" cy="7" r="4" />
+            <path d="M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2" />
+            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+            <path d="M21 21v-2a4 4 0 0 0-3-3.87" />
+          </svg>
+          Applicants
+        </a>
+        <a class="nav-item" href="#">
+          <img
+            class="nav-img nav-img-pipeline"
+            src="https://res.cloudinary.com/dl77jmg2u/image/upload/v1780935811/pipeline_icon.png_v9dunz.jpg"
+            alt=""
+            aria-hidden="true"
+          />
+          Pipeline
+        </a>
+        <a class="nav-item" href="#">
+          <img
+            class="nav-img nav-img-company"
+            src="https://res.cloudinary.com/dl77jmg2u/image/upload/v1780937091/company_profile_icon_flzod2.jpg"
+            alt=""
+            aria-hidden="true"
+          />
+          Company Profile
+        </a>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <a class="nav-item" href="#">
+          <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="10" />
+            <path d="M12 16v-4M12 8h.01" />
+          </svg>
+          Help &amp; Support
+        </a>
+        <a class="nav-item" href="#">
+          <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9" />
+          </svg>
+          Logout
+        </a>
+      </div>
+    </aside>
+
+    <div class="main">
+      <header class="topbar">
+        <label class="topbar-search" aria-label="Search dashboard">
+          <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="11" cy="11" r="8" />
+            <path d="M21 21l-4.35-4.35" />
+          </svg>
+          <input id="search-input" type="search" placeholder="Search applicants, jobs, tasks..." />
+        </label>
+
+        <div class="topbar-right">
+          <button class="topbar-bell" type="button" aria-label="Notifications">
+            <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+              <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+            </svg>
+          </button>
+          <button class="topbar-user" type="button" aria-label="Open Sarah Johnson profile menu">
+            <span class="topbar-avatar">SJ</span>
+            <span class="topbar-uinfo">
+              <strong class="topbar-uname">Sarah Johnson</strong>
+              <span class="topbar-urole">Admin</span>
+            </span>
+            <span class="topbar-caret" aria-hidden="true">
+              <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M6 9l6 6 6-6" />
+              </svg>
+            </span>
+          </button>
+        </div>
+      </header>
+
+      <main class="page">
+        <section class="page-header" aria-labelledby="jobs-title">
+          <div>
+            <h1 id="jobs-title" class="page-title">Jobs</h1>
+            <p class="page-subtitle">Manage all your job postings.</p>
+          </div>
+          <button class="btn-primary" type="button">+ Create job</button>
+        </section>
+
+
+        <section class="tabs" aria-label="Job status filters">
+          <button class="tab active" type="button" data-filter="all">All Jobs (15)</button>
+          <button class="tab" type="button" data-filter="Active">Active (8)</button>
+          <button class="tab" type="button" data-filter="Drafted">Draft (2)</button>
+          <button class="tab" type="button" data-filter="Closed">Closed (5)</button>
+        </section>
+
+        <section class="jobs-panel" aria-label="Jobs table">
+          <div class="table-head table-grid">
+            <span>Jobs</span>
+            <span>Applicants</span>
+            <span>Status</span>
+            <span>Actions</span>
+          </div>
+
+          <div id="jobs-list" class="jobs-list"></div>
+
+          <footer class="table-footer">
+            <p id="results-summary">Showing 1 to 8 of 15 jobs</p>
+            <div class="pagination" aria-label="Pagination">
+              <button type="button" aria-label="Previous page">‹</button>
+              <button class="current" type="button" aria-label="Page 1">1</button>
+              <button type="button" aria-label="Page 2">2</button>
+              <button type="button" aria-label="Next page">›</button>
+            </div>
+          </footer>
+        </section>
+      </main>
+    </div>
+
+    <script src="employersjob.js" defer></script>
+  </body>
+</html>
