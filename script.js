@@ -33,7 +33,7 @@ window.addEventListener("DOMContentLoaded", () => {
 const navButtons = document.querySelectorAll(".nav-btn button");
 
 navButtons[0].addEventListener("click", () => {
-  animateOut("Signin.html");
+  animateOut("SignIn.html");
 });
 
 // Sign Up button (second button in nav-btn)
