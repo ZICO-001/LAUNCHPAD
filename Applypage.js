@@ -4,7 +4,7 @@
 
 // ── USER INFO ─────────────────────────────────
 const user = JSON.parse(localStorage.getItem("launchpad_user") || "null");
-if (!user) window.location.href = "Signin.html";
+if (!user) window.location.href = "SignIn.html";
 
 document.getElementById("userName").textContent =
   user.firstName + " " + user.lastName;
@@ -389,7 +389,7 @@ document.querySelectorAll(".navbar div").forEach((navItem) => {
 document.getElementById("logoutBtn").addEventListener("click", () => {
   localStorage.removeItem("launchpad_token");
   localStorage.removeItem("launchpad_user");
-  window.location.href = "Signin.html";
+  window.location.href = "SigIin.html";
 });
 
 // ── INIT ──────────────────────────────────────

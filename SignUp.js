@@ -210,6 +210,9 @@ signUpBtn.addEventListener("click", async () => {
     setLoading(false);
   }
 });
+document.getElementById("SignIn").addEventListener("click", () => {
+  window.location.href = "SignIn.html";
+});
 
 // ── SOCIAL AUTH ───────────────────────────────
 const [appleBtn, googleBtn] = document.querySelectorAll(".acc_icon div");

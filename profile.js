@@ -6,7 +6,7 @@ const BASE_URL = "https://lunchpad-backend-1.onrender.com/api";
 
 // ── GET LOGGED IN USER ────────────────────────
 const user = JSON.parse(localStorage.getItem("launchpad_user") || "null");
-if (!user) window.location.href = "Signin.html";
+if (!user) window.location.href = "SignIn.html";
 
 const token = localStorage.getItem("launchpad_token");
 
@@ -670,7 +670,7 @@ window.changePassword = function () {
 window.logOut = function () {
   localStorage.removeItem("launchpad_token");
   localStorage.removeItem("launchpad_user");
-  window.location.href = "Signin.html";
+  window.location.href = "SignIn.html";
 };
 
 // ── TAB SWITCHER ──────────────────────────────
@@ -742,7 +742,7 @@ if (logoutBtn) {
   logoutBtn.addEventListener("click", () => {
     localStorage.removeItem("launchpad_token");
     localStorage.removeItem("launchpad_user");
-    window.location.href = "Signin.html";
+    window.location.href = "SignIn.html";
   });
 }
 

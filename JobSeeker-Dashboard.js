@@ -9,7 +9,7 @@ console.log("User from localStorage:", user); // remove after confirming
 
 // If no user found, redirect to sign in
 if (!user) {
-  window.location.href = "Signin.html";
+  window.location.href = "SignIn.html";
 }
 
 // ── SHOW FIRST NAME IN GREETING ───────────────
@@ -214,7 +214,7 @@ if (logoutBtn) {
   logoutBtn.addEventListener("click", () => {
     localStorage.removeItem("launchpad_token");
     localStorage.removeItem("launchpad_user");
-    window.location.href = "Signin.html";
+    window.location.href = "SignIn.html";
   });
 }
 

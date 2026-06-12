@@ -164,6 +164,7 @@ body {
   padding: 5px;
   display: flex;
   gap: 5px;
+  cursor: pointer;
 }
 .sign_btn button {
   width: 270px;
@@ -173,6 +174,7 @@ body {
   border: none;
   font-weight: 600;
   font-size: 16px;
+  cursor: pointer;
 }
 input {
   outline: none;
