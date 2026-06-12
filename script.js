@@ -46,7 +46,7 @@ navButtons[1].addEventListener("click", () => {
 const mainButtons = document.querySelectorAll(".container button");
 
 mainButtons[0].addEventListener("click", () => {
-  animateOut("Signin.html");
+  animateOut("SignIn.html");
 });
 
 // Create Account button (second button in .container)
