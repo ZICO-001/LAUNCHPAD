@@ -76,7 +76,7 @@ a.home {
   color: #fff;
 }
 
-.nav-btn button:hover a {
+.nav-btn button:hover {
   background-color: #1d4edb;
   color: #fff;
 }
@@ -91,11 +91,10 @@ a.home {
   background-color: #1d4edb;
   height: 100%;
 }
-.nav-btn button:nth-child(2):hover,
-a:hover {
+.nav-btn button:nth-child(2):hover {
   border: 1px solid #1d4edb;
   background-color: #fff;
-  /* color: #1d4edb; */
+  color: #1d4edb;
 }
 .main-content {
   margin: 80px 32px 0px;

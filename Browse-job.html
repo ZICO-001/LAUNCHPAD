@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JOB-SEEKER DASHBOARD</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=DM+Serif+Display:ital@0;1&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="Browse-job.css" />
+  </head>
+  <body>
+    <!-- header -->
+    <header class="header" id="head">
+      <div class="search-box">
+        <img src="images/Browse-job-icon.png" alt="" />
+        <input type="text" placeholder="Search jobs, companies or skills..." />
+      </div>
+
+      <div class="header-right">
+        <img src="images/notification-icon.png" alt="" />
+
+        <div class="user">
+          <div class="avatar" id="userAvatar">TA</div>
+
+          <div>
+            <h5 id="userName">Tunde Akinleye</h5>
+            <span>Job Seeker</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- side bar -->
+    <section class="sidebar" id="sidebar">
+      <div class="logo">
+        <img src="images/launchpad logo.png" alt="" />
+        <h1>LaunchPad</h1>
+      </div>
+      <nav class="navbar">
+        <div class="home home-nav">
+          <img src="images/Home-icon.png" alt="" />
+          <a href="JobSeeker-Dashboard.html">Home</a>
+        </div>
+        <div class="browse">
+          <img src="images/Browse-job-icon.png" alt="" />
+          <a href="./Browse-job.html">Browse Job</a>
+        </div>
+        <div class="Saved-job">
+          <img src="images/saved-job-icon.png" alt="" />
+          <a href="Saved-job.html">Saved Jobs</a>
+        </div>
+        <div class="My-Application">
+          <img src="images/APPLICATION-icon.png" alt="" />
+          <a href="Appllication.html">My Applications</a>
+        </div>
+        <div class="profile">
+          <img src="images/profile-icon.png" alt="" />
+          <a href="#">Profile</a>
+        </div>
+      </nav>
+
+      <div class="profile-card">
+        <img src="images/progress-Icon.png" alt="" />
+        <h4>Level up your profile</h4>
+        <p>Complete your profile to get more interview calls.</p>
+
+        <div class="progress-bar">
+          <div class="progress"></div>
+        </div>
+        <div class="profile-progress">
+          <a href="#">Complete Profile </a>
+          <a href="">→</a>
+        </div>
+      </div>
+      <div class="sidebar-bottom" id="logoutBtn">
+        <img src="images/logout-Icon.png" alt="" />
+        <p>Logout</p>
+      </div>
+    </section>
+    <main class="main" id="mainContent">
+      <div class="user-name">
+        <div>
+          <h2>Browse Jobs</h2>
+          <p>Discover verified opportunities that match your skills.</p>
+        </div>
+        <div class="filter" id="filterToggle">
+          <p>Filters</p>
+          <img src="loginImages/Filter-Icon.png" alt="" />
+        </div>
+      </div>
+      <div class="sorting">
+        <p id="jobCount" class="job-found">18 Job Found</p>
+        <div class="sorting-order">
+          <span>Sort by:</span><a href="">Newest</a>
+        </div>
+      </div>
+      <!-- <section class="Appllications" ></section> -->
+      <section class="Appllications" id="jobsList">
+        <div class="main-aplication">
+          <div class="first-application">
+            <div class="Logo">
+              <p>P</p>
+            </div>
+            <div class="job-description">
+              <div class="job-title">
+                <h4>Frontend Developer Intern</h4>
+              </div>
+              <div class="job-details">
+                <p class="pay">Paystack</p>
+
+                <p class="pay">Remote • Lagos</p>
+
+                <p>• Apply last two days</p>
+              </div>
+              <div class="stack">
+                <p>React</p>
+                <p>Nextjs</p>
+                <p>TypeScript</p>
+              </div>
+            </div>
+          </div>
+          <div class="Apply-sec">
+            <h4>$300 / month</h4>
+            <p class="time">saved 2hrs ago</p>
+            <div>
+              <img src="loginImages/saved-icon.png" alt="" />
+              <button type="button"><a href="Applypage.html">Apply</a></button>
+            </div>
+          </div>
+        </div>
+        <!--  -->
+        <div class="main-aplication">
+          <div class="first-application">
+            <div class="Logo">
+              <p>P</p>
+            </div>
+            <div class="job-description">
+              <div class="job-title">
+                <h4>Frontend Developer Intern</h4>
+              </div>
+              <div class="job-details">
+                <p class="pay">Paystack</p>
+
+                <p class="pay">Remote • Lagos</p>
+
+                <p>• Apply last two days</p>
+              </div>
+              <div class="stack">
+                <p>React</p>
+                <p>Nextjs</p>
+                <p>TypeScript</p>
+              </div>
+            </div>
+          </div>
+          <div class="Apply-sec">
+            <h4>$300 / month</h4>
+            <p class="time">saved 2hrs ago</p>
+            <div>
+              <img src="loginImages/saved-icon.png" alt="" />
+              <button type="button"><a href="Applypage.html">Apply</a></button>
+            </div>
+          </div>
+        </div>
+        <!--  -->
+
+        <div class="main-aplication">
+          <div class="first-application">
+            <div class="Logo">
+              <p>P</p>
+            </div>
+            <div class="job-description">
+              <div class="job-title">
+                <h4>Frontend Developer Intern</h4>
+              </div>
+              <div class="job-details">
+                <p class="pay">Paystack</p>
+
+                <p class="pay">Remote • Lagos</p>
+
+                <p>• Apply last two days</p>
+              </div>
+              <div class="stack">
+                <p>React</p>
+                <p>Nextjs</p>
+                <p>TypeScript</p>
+              </div>
+            </div>
+          </div>
+          <div class="Apply-sec">
+            <h4>$300 / month</h4>
+            <p class="time">saved 2hrs ago</p>
+            <div>
+              <img src="loginImages/Unsaved-icon.png" alt="" />
+              <button type="button"><a href="Applypage.html">Apply</a></button>
+            </div>
+          </div>
+        </div>
+        <!--  -->
+
+        <div class="main-aplication">
+          <div class="first-application">
+            <div class="Logo">
+              <p>P</p>
+            </div>
+            <div class="job-description">
+              <div class="job-title">
+                <h4>Frontend Developer Intern</h4>
+              </div>
+              <div class="job-details">
+                <p class="pay">Paystack</p>
+
+                <p class="pay">Remote • Lagos</p>
+
+                <p>• Apply last two days</p>
+              </div>
+              <div class="stack">
+                <p>React</p>
+                <p>Nextjs</p>
+                <p>TypeScript</p>
+              </div>
+            </div>
+          </div>
+          <div class="Apply-sec">
+            <h4>$300 / month</h4>
+            <p class="time">saved 2hrs ago</p>
+            <div>
+              <img src="loginImages/Unsaved-icon.png" alt="" />
+              <button type="button"><a href="Applypage.html">Apply</a></button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <section class="filter-card" id="filterCard" style="display: none">
+      <div class="jobtype">
+        <div class="heading">
+          <h2>Job Type</h2>
+          <span id="close">X</span>
+        </div>
+
+        <div class="internships active">
+          <input type="radio" name="jobtype" value="Internship" />
+          <label for="internship">internship</label>
+        </div>
+        <div class="Contract">
+          <input type="radio" name="jobtype" value="Contract" />
+          <label for="Contract">Contract</label>
+        </div>
+        <div class="freelance">
+          <input type="radio" name="jobtype" value="Freelance" />
+          <label for="freelance">Freelance</label>
+        </div>
+        <div class="Full-time">
+          <input type="radio" name="jobtype" value="Full-time" />
+          <label for="Full-time">Full-time</label>
+        </div>
+      </div>
+      <!--  -->
+      <div class="workmode">
+        <h2>Work Mode</h2>
+        <div class="Remote">
+          <input type="radio" name="workmode" value="Remote" />
+          <label for="remote">Remote</label>
+        </div>
+        <div class="On-site">
+          <input type="radio" name="workmode" value="On-site" />
+          <label for="On-site">On-site</label>
+        </div>
+        <div class="Hybrid">
+          <input type="radio" name="workmode" value="Hybrid" />
+          <label for="freelance">Hybrid</label>
+        </div>
+      </div>
+      <button type="button" id="applyFilterBtn">Apply filters</button>
+    </section>
+    <script src="./Browse-job.js"></script>
+  </body>
+</html>

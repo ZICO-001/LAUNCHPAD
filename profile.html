@@ -24,10 +24,10 @@
         <img src="images/notification-icon.png" alt="" />
 
         <div class="user">
-          <div class="avatar">TA</div>
+          <div class="avatar" id="userAvatar">TA</div>
 
           <div>
-            <h5>Tunde Akinleye</h5>
+            <h5 id="userName">Tunde Akinleye</h5>
             <span>Job Seeker</span>
           </div>
         </div>
@@ -43,15 +43,15 @@
       <nav class="navbar">
         <div class="home">
           <img src="images/Home-icon.png" alt="" />
-          <a href="Job-Seeker.html">Home</a>
+          <a href="JobSeeker-Dashboard.html">Home</a>
         </div>
         <div class="browse">
           <img src="images/Browse-job-icon.png" alt="" />
-          <a href="#">Browse Job</a>
+          <a href="#Browse-job.html">Browse Job</a>
         </div>
         <div class="Saved-job">
           <img src="images/saved-job-icon.png" alt="" />
-          <a href="#">Saved Jobs</a>
+          <a href="#saved-job.html">Saved Jobs</a>
         </div>
         <div class="My-Application">
           <img src="images/APPLICATION-icon.png" alt="" />
@@ -59,7 +59,7 @@
         </div>
         <div class="profile">
           <img src="images/profile-icon.png" alt="" />
-          <a href="#">Profile</a>
+          <a href="#profile.html">Profile</a>
         </div>
       </nav>
     </section>
@@ -69,23 +69,23 @@
         <p>Manage your personal information and career preferences</p>
       </div>
       <div class="profile-nav">
-        <a href="#" class="overview">Overview</a>
-        <a href="#">Personal Info</a>
-        <a href="#">Skills</a>
-        <a href="#">Experience</a>
-        <a href="#">Education</a>
-        <a href="#">Portfolio</a>
-        <a href="#">Settings</a>
+        <a href="#" class="overview" id="navOverview">Overview</a>
+        <a href="#" id="navPersonalInfo">Personal Info</a>
+        <a href="#" id="navSkills">Skills</a>
+        <a href="#" id="navExperience">Experience</a>
+        <a href="#" id="navEducation">Education</a>
+        <a href="#" id="navPortfolio">Portfolio</a>
+        <a href="#" id="navSettings">Settings</a>
       </div>
-      <section class="profile-space">
+      <section class="profile-space" id="profileSpace">
         <div class="profile-strength">
           <div class="profile-head">
             <h4>Profile strength</h4>
-            <span>60% completion</span>
+            <span id="strengthPercent">60% completion</span>
           </div>
 
           <div class="progress-bar">
-            <div class="progress"></div>
+            <div class="progress" id="strengthBar"></div>
           </div>
           <p>
             Complete your profile to increase your chances of getting hired by
@@ -107,12 +107,23 @@
           </div>
           <div class="main-details">
             <div class="profile-intro">
-              <img src="loginImages/Profile-img.png" alt="" />
+              <img
+                src="loginImages/Profile-img.png"
+                alt=""
+                id="profilePhoto"
+                style="cursor: pointer"
+              />
+              <input
+                type="file"
+                id="photoUpload"
+                accept="image/*"
+                style="display: none"
+              />
               <div>
-                <p class="name">Tunde Adeleke</p>
-                <p class="stack">UI/UX designer</p>
-                <p class="location">lagos, Nigeria</p>
-                <p class="bio">
+                <p class="name" id="profileName">Tunde Adeleke</p>
+                <p class="stack" id="profileRole">UI/UX designer</p>
+                <p class="location" id="profileLocation">lagos, Nigeria</p>
+                <p class="bio" id="profileBio">
                   Creative UI/UX designer with a passion for solving problems
                   through beautiful and functional design. 5+ years of
                   experience in fintech and e-commerce industries.
@@ -124,7 +135,7 @@
                 <p>Skills</p>
                 <div class="hr-line"></div>
               </div>
-              <div class="skills-list">
+              <div class="skills-list" id="skillsList">
                 <span>Figma</span>
                 <span>UI/UX</span>
                 <span>Prototying</span>
@@ -149,5 +160,6 @@
         </div>
       </section>
     </main>
+    <script src="profile.js"></script>
   </body>
 </html>

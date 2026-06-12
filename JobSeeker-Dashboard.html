@@ -24,10 +24,10 @@
         <img src="images/notification-icon.png" alt="" />
 
         <div class="user">
-          <div class="avatar">TA</div>
+          <div class="avatar" id="userAvatar">TA</div>
 
           <div>
-            <h5>Tunde Akinleye</h5>
+            <h5 id="userName">Tunde Akinleye</h5>
             <span>Job Seeker</span>
           </div>
         </div>
@@ -43,23 +43,23 @@
       <nav class="navbar">
         <div class="home">
           <img src="images/Home-icon.png" alt="" />
-          <a href="">Home</a>
+          <a href="" id="navHome">Home</a>
         </div>
         <div class="browse">
           <img src="images/Browse-job-icon.png" alt="" />
-          <a href="#">Browse Job</a>
+          <a href="#" id="navBrowse">Browse Job</a>
         </div>
         <div class="Saved-job">
           <img src="images/saved-job-icon.png" alt="" />
-          <a href="#">Saved Jobs</a>
+          <a href="#Saved-job.html" id="navSaved">Saved Jobs</a>
         </div>
         <div class="My-Application">
           <img src="images/APPLICATION-icon.png" alt="" />
-          <a href="Appllication.html">My Applications</a>
+          <a href="Appllication.html" id="navApplication">My Applications</a>
         </div>
         <div class="profile">
           <img src="images/profile-icon.png" alt="" />
-          <a href="profile.html">Profile</a>
+          <a href="profile.html" id="navProfile">Profile</a>
         </div>
       </nav>
 
@@ -76,14 +76,14 @@
           <a href="">→</a>
         </div>
       </div>
-      <div class="sidebar-bottom">
+      <div class="sidebar-bottom" id="logoutBtn">
         <img src="images/logout-Icon.png" alt="" />
         <p>Logout</p>
       </div>
     </section>
     <main class="main">
       <div class="user-name">
-        <h2>Good morning, <span>Tunde</span>👋</h2>
+        <h2>Good morning, <span id="greetingName">Tunde</span>👋</h2>
         <p>
           Find relevant opportunity and take the next step in your tech career.
         </p>
@@ -92,9 +92,9 @@
       <section class="verified-opportunity">
         <div class="verified-head">
           <h2>Verified opportunity</h2>
-          <a href="">View jobs →</a>
+          <a href="Browse-job.html">View jobs →</a>
         </div>
-        <div class="opportunity-cards">
+        <div class="opportunity-cards" id="opportunityCards">
           <div class="card1">
             <div class="head">
               <p class="Logo">P</p>
@@ -178,7 +178,7 @@
       <section class="joblisting">
         <div>
           <h2>Recent job listings</h2>
-          <a href="">View all jobs →</a>
+          <a href="Browse-job.html" id="viewAllVerified">View jobs →</a>
         </div>
         <table class="jobs">
           <tr>
@@ -190,36 +190,40 @@
             <th>Action</th>
           </tr>
           <!--  -->
-          <tr>
-            <td>Data Analyst Intern</td>
-            <td>Kuda Bank</td>
-            <td>Hybrid</td>
-            <td>$200 - $300</td>
-            <td>5 hrs ago</td>
-            <td>Apply</td>
-          </tr>
+          <tbody id="jobsTableBody">
+            <tr>
+              <td>Data Analyst Intern</td>
+              <td>Kuda Bank</td>
+              <td>Hybrid</td>
+              <td>$200 - $300</td>
+              <td>5 hrs ago</td>
+              <td>Apply</td>
+            </tr>
 
-          <tr>
-            <td>Devops Intern</td>
-            <td>stackHQ</td>
-            <td>Remote</td>
-            <td>$180 - $300</td>
-            <td>7 hrs ago</td>
-            <td>Apply</td>
-          </tr>
-          <tr>
-            <td>QA Analyst Intern</td>
-            <td>carbon</td>
-            <td>Lagos Nigeria</td>
-            <td>$200 - $300</td>
-            <td>7 hrs ago</td>
-            <td>Apply</td>
-          </tr>
-          <tr class="all-jobs">
-            <td colspan="6"><a href="#">View all</a></td>
-          </tr>
+            <tr>
+              <td>Devops Intern</td>
+              <td>stackHQ</td>
+              <td>Remote</td>
+              <td>$180 - $300</td>
+              <td>7 hrs ago</td>
+              <td>Apply</td>
+            </tr>
+            <tr>
+              <td>QA Analyst Intern</td>
+              <td>carbon</td>
+              <td>Lagos Nigeria</td>
+              <td>$200 - $300</td>
+              <td>7 hrs ago</td>
+              <td>Apply</td>
+            </tr>
+            <tr class="all-jobs">
+              <td colspan="6"><a href="#" id="viewAllJobs">View all</a></td>
+            </tr>
+          </tbody>
         </table>
       </section>
     </main>
+
+    <script src="JobSeeker-Dashboard.js"></script>
   </body>
 </html>

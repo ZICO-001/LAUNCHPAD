@@ -234,9 +234,7 @@ input::placeholder {
   top: 65px;
   right: 10px;
 }
-.password img:last-of-type {
-  display: none;
-}
+
 .container2 .forgot-password {
   float: right;
   text-decoration: none;
@@ -268,10 +266,7 @@ input::placeholder {
   transition: 0.2s ease-in-out;
 }
 .container2 .sign-up:hover {
-  /* background-color: transparent;
-  border: 1px solid #1d4edb;
-  color: #1d4edb; */
-  transform: translateY(-2px);
+  opacity: 0.8;
 }
 .f-line,
 .l-line {
@@ -304,7 +299,7 @@ input::placeholder {
   align-items: center;
   justify-content: center;
 }
-.signup {
+.signin {
   text-align: center;
   margin-top: 40px;
   font-weight: 500px;

@@ -1,0 +1,558 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  font-family: "DM Sans", sans-serif;
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  grid-template-rows: 70px 1fr;
+  grid-template-areas:
+    "sidebar header"
+    "sidebar main";
+  background-color: #f9f8fe;
+}
+
+/* ── HEADER ── */
+.header {
+  background-color: #fff;
+  border-bottom: 1px solid #e0e0e0;
+  grid-area: header;
+  height: 70px;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 50px;
+}
+
+.search-box {
+  margin-left: 80px;
+  position: relative;
+}
+.search-box img {
+  filter: brightness(0);
+  position: absolute;
+  left: 50px;
+  top: 10px;
+}
+.search-box input {
+  width: 512px;
+  height: 42px;
+  padding: 10px 10px 10px 40px;
+  border-radius: 8px;
+  border: 1px solid #d1d1d1;
+  margin-left: 40px;
+  font-family: "DM Sans", sans-serif;
+  font-size: 14px;
+  outline: none;
+}
+.search-box input:focus {
+  border-color: #1d4edb;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.header-right > img {
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  border-left: 2px solid #d1d1d1;
+  padding-left: 20px;
+  gap: 11px;
+  cursor: pointer;
+}
+.user .avatar {
+  width: 35px;
+  height: 35px;
+  background-color: #1d4edb;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 13px;
+  font-weight: 700;
+}
+.user h5 {
+  font-size: 13px;
+  font-weight: 600;
+}
+.user span {
+  font-size: 11px;
+  color: #888;
+}
+
+/* ── SIDEBAR ── */
+.sidebar {
+  background-color: #1d4edb;
+  grid-area: sidebar;
+  padding: 26px 16px;
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.sidebar .logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.sidebar .logo img {
+  background-color: #fff;
+  border-radius: 7px;
+  width: 36px;
+  height: 36px;
+}
+.logo h1 {
+  font-size: 26px;
+  font-family: "DM Serif Display";
+  color: #fff;
+}
+
+.navbar {
+  margin-top: 40px;
+  flex: 1;
+}
+.navbar div {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 223px;
+  height: 50px;
+  margin-top: 5px;
+  padding: 16px 10px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+.navbar div img {
+  width: 22px;
+  filter: brightness(10);
+}
+.navbar div a {
+  text-decoration: none;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 500;
+}
+.navbar div:hover,
+.navbar div.active-nav {
+  background-color: #fff;
+}
+.navbar div:hover a,
+.navbar div.active-nav a {
+  color: #000;
+}
+.navbar div:hover img,
+.navbar div.active-nav img {
+  filter: brightness(0);
+}
+
+.sidebar-bottom {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-top: 2px solid #ffffff30;
+  padding: 16px 10px;
+  cursor: pointer;
+  margin-top: 20px;
+  border-radius: 12px;
+  transition: background-color 0.2s;
+}
+.sidebar-bottom:hover {
+  background-color: #ffffff20;
+}
+.sidebar-bottom img {
+  width: 22px;
+  filter: brightness(10);
+}
+.sidebar-bottom p {
+  color: #fff;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+/* ── MAIN ── */
+.main {
+  grid-area: main;
+  padding: 28px 36px;
+  overflow-y: auto;
+}
+
+/* Welcome row */
+.welcome-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 28px;
+}
+.user-name h2 {
+  font-family: "DM Serif Display";
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 36px;
+}
+.user-name p {
+  margin-top: 6px;
+  color: #3c3d43;
+  font-size: 14px;
+}
+
+.post-job-btn {
+  background-color: #1d4edb;
+  color: #fff;
+  border: none;
+  padding: 12px 22px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  font-family: "DM Sans", sans-serif;
+  cursor: pointer;
+  transition:
+    transform 0.2s,
+    background-color 0.2s;
+  box-shadow: 0 4px 20px #1d4edb40;
+}
+.post-job-btn:hover {
+  transform: translateY(-2px);
+  background-color: #1a44c8;
+}
+
+/* ── STAT CARDS ── */
+.stat-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.stat-card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 20px;
+  border: 1px solid #e8edf5;
+  box-shadow: 0 2px 10px #0000000a;
+}
+.stat-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+.stat-top p {
+  font-size: 13px;
+  color: #666;
+  font-weight: 500;
+}
+.stat-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.stat-icon img {
+  width: 18px;
+  height: 18px;
+}
+.blue-icon {
+  background-color: #1d4edb5e;
+}
+.purple-icon {
+  background-color: #1d4edb5e;
+}
+.orange-icon {
+  background-color: #f49f225e;
+}
+.green-icon {
+  background-color: #6bff8f5e;
+}
+
+.stat-card h2 {
+  font-size: 32px;
+  font-weight: 700;
+  color: #111;
+  font-family: "DM Serif Display";
+  margin-bottom: 8px;
+}
+.stat-sub {
+  font-size: 12px;
+  font-weight: 500;
+}
+.stat-sub.green {
+  color: #16a34a;
+}
+.stat-sub.blue {
+  color: #1d4edb;
+}
+.stat-sub.grey {
+  color: #888;
+}
+
+.conversion-bar {
+  width: 100%;
+  height: 6px;
+  background: #e5e7eb;
+  border-radius: 50px;
+  margin-top: 10px;
+}
+.conversion-fill {
+  height: 100%;
+  background: #1d4edb;
+  border-radius: 50px;
+  width: 12%;
+  transition: width 0.8s ease;
+}
+
+/* ── BOTTOM ROW ── */
+.bottom-row {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+/* Job Posts Table */
+.job-posts {
+  background: #fff;
+  border-radius: 14px;
+  padding: 24px;
+  border: 1px solid #e8edf5;
+  box-shadow: 0 2px 10px #0000000a;
+}
+
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.section-head h2 {
+  font-size: 18px;
+  font-weight: 600;
+}
+.section-head a {
+  text-decoration: none;
+  color: #1d4edb;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.job-posts table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.job-posts th {
+  text-align: left;
+  font-size: 12px;
+  font-weight: 600;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 10px 14px;
+  background-color: #eff4ff;
+  border-bottom: 1px solid #e8edf5;
+}
+.job-posts td {
+  padding: 14px;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 14px;
+}
+.job-posts tr:last-child td {
+  border-bottom: none;
+}
+
+.job-role-title {
+  font-weight: 600;
+  color: #111;
+  font-size: 14px;
+}
+.job-role-sub {
+  font-size: 12px;
+  color: #888;
+  margin-top: 2px;
+}
+
+.applicant-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #1d4edb;
+  color: #fff;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 4px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+.status-active {
+  background-color: #dcfce7;
+  color: #16a34a;
+}
+.status-closed {
+  background-color: #fee2e2;
+  color: #dc2626;
+}
+.status-draft {
+  background-color: #f3f4f6;
+  color: #6b7280;
+}
+.status-paused {
+  background-color: #fef9c3;
+  color: #ca8a04;
+}
+
+/* Top Performer */
+.top-performer {
+  background-color: #1d4edb;
+  color: #fff;
+  border-radius: 14px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.performer-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  opacity: 0.7;
+  text-transform: uppercase;
+}
+.top-performer h3 {
+  font-size: 20px;
+  font-family: "DM Serif Display";
+  font-weight: 400;
+}
+.top-performer > p {
+  font-size: 13px;
+  opacity: 0.8;
+  line-height: 1.5;
+}
+.performer-stats {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-top: 10px;
+}
+.performer-stats h2 {
+  font-size: 40px;
+  font-family: "DM Serif Display";
+  font-weight: 400;
+}
+.performer-stats > div:first-child p {
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+/* Mini bar chart */
+.bar-chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 5px;
+  height: 50px;
+}
+.bar {
+  width: 10px;
+  background-color: #ffffff60;
+  border-radius: 3px 3px 0 0;
+}
+.bar:last-child {
+  background-color: #fff;
+}
+
+.trend {
+  font-size: 12px;
+  font-weight: 600;
+}
+.trend.green {
+  color: #86efac;
+}
+
+/* ── RECENT ACTIVITY ── */
+.recent-activity {
+  background: #fff;
+  border-radius: 14px;
+  padding: 24px;
+  border: 1px solid #e8edf5;
+  box-shadow: 0 2px 10px #0000000a;
+  margin-bottom: 40px;
+}
+
+#activityList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.activity-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 16px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+.activity-item:last-child {
+  border-bottom: none;
+}
+
+.activity-dot {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 16px;
+}
+.dot-blue {
+  background-color: #dbeafe;
+}
+.dot-orange {
+  background-color: #fef3c7;
+}
+.dot-green {
+  background-color: #dcfce7;
+}
+
+.activity-text p {
+  font-size: 14px;
+  font-weight: 500;
+  color: #111;
+}
+.activity-text p span {
+  color: #1d4edb;
+  font-weight: 600;
+}
+.activity-text small {
+  font-size: 12px;
+  color: #999;
+  margin-top: 3px;
+  display: block;
+}

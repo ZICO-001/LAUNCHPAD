@@ -43,23 +43,23 @@
       <nav class="navbar">
         <div class="home">
           <img src="images/Home-icon.png" alt="" />
-          <a href="Job-Seeker.html">Home</a>
+          <a href="JobSeeker-Dashboard.html" id="navHome">Home</a>
         </div>
         <div class="browse">
           <img src="images/Browse-job-icon.png" alt="" />
-          <a href="#">Browse Job</a>
+          <a href="Browse-job.html" id="navBrowse">Browse Job</a>
         </div>
         <div class="Saved-job">
           <img src="images/saved-job-icon.png" alt="" />
-          <a href="#">Saved Jobs</a>
+          <a href="Saved-job.html" id="navSaved">Saved Jobs</a>
         </div>
         <div class="My-Application">
           <img src="images/APPLICATION-icon.png" alt="" />
-          <a href="Appllication.html">My Applications</a>
+          <a href="Appllication.html" id="navApplication">My Applications</a>
         </div>
         <div class="profile">
           <img src="images/profile-icon.png" alt="" />
-          <a href="#">Profile</a>
+          <a href="#" id="navProfile">Profile</a>
         </div>
       </nav>
 
@@ -76,7 +76,7 @@
           <a href="">→</a>
         </div>
       </div>
-      <div class="sidebar-bottom">
+      <div class="sidebar-bottom" id="logoutBtn">
         <img src="images/logout-Icon.png" alt="" />
         <p>Logout</p>
       </div>
@@ -87,146 +87,14 @@
         <p>Jobs you've saved for later</p>
       </div>
       <div class="profile-nav">
-        <a href="#" class="overview">All</a>
-        <a href="#">Expiring Soon</a>
-        <a href="#">Not Applied </a>
-        <a href="#">Applied</a>
+        <a href="#" class="overview" id="filterAll">All</a>
+        <a href="#" id="filterNotApplied">Not Applied</a>
+        <a href="#" id="filterApplied">Applied</a>
       </div>
-      <section class="Appllications">
-        <div class="main-aplication">
-          <div class="first-application">
-            <div class="Logo">
-              <p>P</p>
-            </div>
-            <div class="job-description">
-              <div class="job-title">
-                <h4>Frontend Developer Intern</h4>
-              </div>
-              <div class="job-details">
-                <p class="pay">Paystack</p>
 
-                <p class="pay">Remote • Lagos</p>
-
-                <p>• Apply last two days</p>
-              </div>
-              <div class="stack">
-                <p>React</p>
-                <p>Nextjs</p>
-                <p>TypeScript</p>
-              </div>
-            </div>
-          </div>
-          <div class="Apply-sec">
-            <h4>$300 / month</h4>
-            <p class="time">saved 2hrs ago</p>
-            <div>
-              <img src="loginImages/saved-icon.png" alt="" />
-              <button type="button"><a href="Applypage.html">Apply</a></button>
-            </div>
-          </div>
-        </div>
-        <!--  -->
-        <div class="main-aplication">
-          <div class="first-application">
-            <div class="Logo">
-              <p>P</p>
-            </div>
-            <div class="job-description">
-              <div class="job-title">
-                <h4>Frontend Developer Intern</h4>
-              </div>
-              <div class="job-details">
-                <p class="pay">Paystack</p>
-
-                <p class="pay">Remote • Lagos</p>
-
-                <p>• Apply last two days</p>
-              </div>
-              <div class="stack">
-                <p>React</p>
-                <p>Nextjs</p>
-                <p>TypeScript</p>
-              </div>
-            </div>
-          </div>
-          <div class="Apply-sec">
-            <h4>$300 / month</h4>
-            <p class="time">saved 2hrs ago</p>
-            <div>
-              <img src="loginImages/saved-icon.png" alt="" />
-              <button type="button"><a href="Applypage.html">Apply</a></button>
-            </div>
-          </div>
-        </div>
-        <!--  -->
-
-        <div class="main-aplication">
-          <div class="first-application">
-            <div class="Logo">
-              <p>P</p>
-            </div>
-            <div class="job-description">
-              <div class="job-title">
-                <h4>Frontend Developer Intern</h4>
-              </div>
-              <div class="job-details">
-                <p class="pay">Paystack</p>
-
-                <p class="pay">Remote • Lagos</p>
-
-                <p>• Apply last two days</p>
-              </div>
-              <div class="stack">
-                <p>React</p>
-                <p>Nextjs</p>
-                <p>TypeScript</p>
-              </div>
-            </div>
-          </div>
-          <div class="Apply-sec">
-            <h4>$300 / month</h4>
-            <p class="time">saved 2hrs ago</p>
-            <div>
-              <img src="loginImages/saved-icon.png" alt="" />
-              <button type="button"><a href="Applypage.html">Apply</a></button>
-            </div>
-          </div>
-        </div>
-        <!--  -->
-
-        <div class="main-aplication">
-          <div class="first-application">
-            <div class="Logo">
-              <p>P</p>
-            </div>
-            <div class="job-description">
-              <div class="job-title">
-                <h4>Frontend Developer Intern</h4>
-              </div>
-              <div class="job-details">
-                <p class="pay">Paystack</p>
-
-                <p class="pay">Remote • Lagos</p>
-
-                <p>• Apply last two days</p>
-              </div>
-              <div class="stack">
-                <p>React</p>
-                <p>Nextjs</p>
-                <p>TypeScript</p>
-              </div>
-            </div>
-          </div>
-          <div class="Apply-sec">
-            <h4>$300 / month</h4>
-            <p class="time">saved 2hrs ago</p>
-            <div>
-              <img src="loginImages/saved-icon.png" alt="" />
-              <button type="button"><a href="Applypage.html">Apply</a></button>
-            </div>
-          </div>
-        </div>
-      </section>
+      <section class="Appllications" id="savedJobsList"></section>
     </main>
+
+    <script src="./Saved-job.js"></script>
   </body>
 </html>

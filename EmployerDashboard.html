@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EMPLOYER DASHBOARD</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=DM+Serif+Display:ital@0;1&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="EmployerDashboard.css" />
+  </head>
+  <body>
+    <!-- ── HEADER ── -->
+    <header class="header">
+      <div class="search-box">
+        <img src="images/Browse-job-icon.png" alt="" />
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Search applicants, jobs, tasks..."
+        />
+      </div>
+      <div class="header-right">
+        <img src="images/notification-icon.png" alt="" id="notificationBtn" />
+        <div class="user">
+          <div class="avatar" id="userAvatar">SJ</div>
+          <div>
+            <h5 id="userName">Sarah Johnson</h5>
+            <span>Admin</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- ── SIDEBAR ── -->
+    <section class="sidebar">
+      <div class="logo">
+        <img src="images/launchpad logo.png" alt="" />
+        <h1>LaunchPad</h1>
+      </div>
+
+      <nav class="navbar">
+        <div class="home active-nav" id="nav-home">
+          <img src="images/Home-icon.png" alt="" />
+          <a href="#">Home</a>
+        </div>
+        <div id="nav-jobs">
+          <img src="images/Browse-job-icon.png" alt="" />
+          <a href="#">Jobs</a>
+        </div>
+        <div id="nav-applicants">
+          <img src="images/APPLICATION-icon.png" alt="" />
+          <a href="#">Applicants</a>
+        </div>
+        <div id="nav-pipeline">
+          <img src="images/saved-job-icon.png" alt="" />
+          <a href="#">Pipeline</a>
+        </div>
+        <div id="nav-profile">
+          <img src="images/profile-icon.png" alt="" />
+          <a href="#">Company Profile</a>
+        </div>
+      </nav>
+
+      <div class="sidebar-bottom" id="logoutBtn">
+        <img src="images/logout-Icon.png" alt="" />
+        <p>Logout</p>
+      </div>
+    </section>
+
+    <!-- ── MAIN ── -->
+    <main class="main">
+      <!-- Welcome + Post Job -->
+      <div class="welcome-row">
+        <div class="user-name">
+          <h2>Welcome back, <span id="greetingName">Sarah</span> 👋</h2>
+          <p>Here's what's happening with your hiring today.</p>
+        </div>
+        <button class="post-job-btn" id="postJobBtn">+ Post a Job</button>
+      </div>
+
+      <!-- ── STAT CARDS ── -->
+      <section class="stat-cards">
+        <div class="stat-card">
+          <div class="stat-top">
+            <p>Total Applicants</p>
+            <div class="stat-icon blue-icon">
+              <img src="images/APPLICATION-icon.png" alt="" />
+            </div>
+          </div>
+          <h2 id="totalApplicants">—</h2>
+          <p class="stat-sub green" id="applicantsTrend">↑ Loading...</p>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-top">
+            <p>New Applicants</p>
+            <div class="stat-icon purple-icon">
+              <img src="images/profile-icon.png" alt="" />
+            </div>
+          </div>
+          <h2 id="newApplicants">—</h2>
+          <p class="stat-sub blue" id="newApplicantsSub">
+            In the last 48 hours
+          </p>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-top">
+            <p>Shortlisted</p>
+            <div class="stat-icon orange-icon">
+              <img src="images/saved-job-icon.png" alt="" />
+            </div>
+          </div>
+          <h2 id="shortlisted">—</h2>
+          <p class="stat-sub grey" id="shortlistedSub">Across all open roles</p>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-top">
+            <p>Conversion Rate</p>
+            <div class="stat-icon green-icon">
+              <img src="images/verified-icon.png" alt="" />
+            </div>
+          </div>
+          <h2 id="conversionRate">—</h2>
+          <div class="conversion-bar">
+            <div class="conversion-fill" id="conversionFill"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── BOTTOM ROW: Recent Job Posts + Top Performer ── -->
+      <div class="bottom-row">
+        <!-- Recent Job Posts Table -->
+        <section class="job-posts">
+          <div class="section-head">
+            <h2>Recent Job Posts</h2>
+            <a href="#" id="viewAllJobs">View All →</a>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th>Job Role</th>
+                <th>Posted</th>
+                <th>Applicants</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="jobPostsBody">
+              <!-- Injected by JS -->
+            </tbody>
+          </table>
+        </section>
+
+        <!-- Top Performer Card -->
+        <div class="top-performer" id="topPerformerCard">
+          <p class="performer-label">TOP PERFORMER</p>
+          <h3 id="topJobTitle">—</h3>
+          <p id="topJobDesc">
+            Receiving high quality applications consistently.
+          </p>
+          <div class="performer-stats">
+            <div>
+              <h2 id="topApplicantsCount">—</h2>
+              <p>Applicants this week</p>
+            </div>
+            <div class="bar-chart">
+              <div class="bar" style="height: 30%"></div>
+              <div class="bar" style="height: 55%"></div>
+              <div class="bar" style="height: 45%"></div>
+              <div class="bar" style="height: 80%"></div>
+              <div class="bar" style="height: 100%"></div>
+            </div>
+          </div>
+          <p class="trend green" id="topTrend">↑ 25% more than last week</p>
+        </div>
+      </div>
+
+      <!-- ── RECENT ACTIVITY ── -->
+      <section class="recent-activity">
+        <div class="section-head">
+          <h2>Recent Activity</h2>
+        </div>
+        <ul id="activityList">
+          <!-- Injected by JS -->
+        </ul>
+      </section>
+    </main>
+
+    <script src="Dashboard.js"></script>
+  </body>
+</html>

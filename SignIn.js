@@ -1,17 +1,11 @@
 // =============================================
 //  LaunchPad — Sign In Page JavaScript
-//  Targets: #jobSeekerBtn, #employerBtn,
-//           #signInEmail, #signInPassword,
-//           #termsCheckbox, #signInBtn,
-//           #signInForm, #passwordToggle
 // =============================================
 
-// ── BASE URL ──────────────────────────────────
-// Replace with your actual backend base URL
-const BASE_URL = "https://your-api-domain.com/api";
+const BASE_URL = "https://lunchpad-backend-1.onrender.com/api";
 
 // ── STATE ─────────────────────────────────────
-let selectedRole = null; // "job_seeker" | "employer"
+let selectedRole = null;
 
 // ── ELEMENT REFERENCES ────────────────────────
 const jobSeekerBtn = document.getElementById("jobSeekerBtn");
@@ -23,20 +17,22 @@ const signInBtn = document.getElementById("signInBtn");
 const signInForm = document.getElementById("signInForm");
 const passwordToggle = document.getElementById("passwordToggle");
 
-// ── ROLE SELECTION ────────────────────────────
-// Highlights the chosen role button and saves selection
+// ── PREVENT FORM DEFAULT SUBMIT ───────────────
+// This stops the form from clearing/refreshing the page
+if (signInForm) {
+  signInForm.addEventListener("submit", (e) => e.preventDefault());
+}
 
+// ── ROLE SELECTION ────────────────────────────
 function setActiveRole(role) {
   selectedRole = role;
 
-  // Reset both to default
   jobSeekerBtn.style.backgroundColor = "";
   jobSeekerBtn.style.color = "";
   employerBtn.style.backgroundColor = "";
   employerBtn.style.color = "";
 
-  // Highlight selected
-  if (role === "job_seeker") {
+  if (role === "applicant") {
     jobSeekerBtn.style.backgroundColor = "#1d4edb";
     jobSeekerBtn.style.color = "#fff";
   } else if (role === "employer") {
@@ -45,24 +41,25 @@ function setActiveRole(role) {
   }
 }
 
-jobSeekerBtn.addEventListener("click", () => setActiveRole("job_seeker"));
+jobSeekerBtn.addEventListener("click", () => setActiveRole("applicant"));
 employerBtn.addEventListener("click", () => setActiveRole("employer"));
 
-// ── PASSWORD VISIBILITY TOGGLE ────────────────
-// Clicking the eye icon toggles password visibility
-
+// ── PASSWORD TOGGLE ────────────────────────────
 if (passwordToggle) {
   passwordToggle.addEventListener("click", () => {
     const isHidden = passwordInput.type === "password";
     passwordInput.type = isHidden ? "text" : "password";
-    // Swap icon if you have open/closed eye assets:
     passwordToggle.src = isHidden
-      ? "loginImages/password-icon.png"
-      : "loginImages/password-icon-open.png";
+      ? "loginImages/password-icon-open.png"
+      : "loginImages/password-icon.png";
   });
 }
 
-// ── FORM VALIDATION ───────────────────────────
+// ── VALIDATION ────────────────────────────────
+function isValidEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
 function validateForm() {
   const email = emailInput.value.trim();
   const password = passwordInput.value.trim();
@@ -86,10 +83,6 @@ function validateForm() {
     return false;
   }
   return true;
-}
-
-function isValidEmail(email) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
 // ── UI HELPERS ────────────────────────────────
@@ -116,100 +109,85 @@ function setLoading(isLoading) {
   signInBtn.textContent = isLoading ? "Signing in…" : "Sign In";
 }
 
-// ── SIGN IN API CALL ──────────────────────────
-// POST /api/auth/login
-// Body:     { email, password, role }
-// Success:  { token, user: { id, email, role, first_name, last_name } }
-// Failure:  { message: "Invalid credentials" }
-
-async function loginUser(payload) {
-  const response = await fetch(`${BASE_URL}/auth/login`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(payload),
-  });
-
-  const data = await response.json();
-
-  if (!response.ok) {
-    // 401 → wrong credentials, 404 → account not found, etc.
-    throw new Error(data.message || "Sign in failed. Please try again.");
-  }
-
-  return data; // { token, user }
-}
-
-// ── REDIRECT BASED ON ROLE ────────────────────
-// After a successful login, send the user to the right dashboard
-
+// ── REDIRECT ──────────────────────────────────
 function redirectToDashboard(role) {
   if (role === "employer") {
     window.location.href = "EmployerDashboard.html";
   } else {
-    window.location.href = "JobSeekerDashboard.html";
+    window.location.href = "JobSeeker-Dashboard.html";
   }
 }
 
-// ── SIGN IN SUBMIT HANDLER ────────────────────
-signInBtn.addEventListener("click", async () => {
-  clearError();
+// ── LOGIN API ─────────────────────────────────
+// POST /api/auth/login
+// Body:    { email, password }
+// Returns: { success, message, data: { token, firstName, lastName, email, role, _id } }
 
+async function loginUser(email, password) {
+  const res = await fetch(`${BASE_URL}/auth/login`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email, password }),
+  });
+
+  const contentType = res.headers.get("content-type");
+  if (!contentType || !contentType.includes("application/json")) {
+    throw new Error("Server error. Please try again later.");
+  }
+
+  const json = await res.json();
+  if (!res.ok || !json.success) {
+    throw new Error(json.message || "Sign in failed. Please try again.");
+  }
+
+  return json.data;
+}
+
+// ── SIGN IN CLICK ─────────────────────────────
+signInBtn.addEventListener("click", async (e) => {
+  e.preventDefault(); // extra safety — stops any form submit
+  clearError();
   if (!validateForm()) return;
 
-  const payload = {
-    email: emailInput.value.trim(),
-    password: passwordInput.value,
-    role: selectedRole, // "job_seeker" | "employer"
-  };
-
   setLoading(true);
-
   try {
-    const data = await loginUser(payload);
+    const data = await loginUser(emailInput.value.trim(), passwordInput.value);
+    // alert(data);
 
-    // ── Save auth data to localStorage ──
-    localStorage.setItem("launchpad_token", data.token);
-    localStorage.setItem("launchpad_user", JSON.stringify(data.user));
+    console.log("Login response:", data); // remove after confirming
 
-    // ── Redirect to the correct dashboard ──
-    redirectToDashboard(data.user.role);
-  } catch (error) {
-    // Show friendly error messages for common cases
-    if (error.message.toLowerCase().includes("invalid")) {
-      showError("Incorrect email or password. Please try again.");
-    } else if (error.message.toLowerCase().includes("not found")) {
-      showError("No account found with that email. Please sign up first.");
-    } else {
-      showError(error.message);
+    // Check role matches selection
+    if (data.role !== selectedRole) {
+      const roleName = selectedRole === "employer" ? "Employer" : "Job Seeker";
+      throw new Error(`This account is not registered as a ${roleName}.`);
     }
+
+    // ── Save user — fallback to email prefix if name is empty ──
+    const emailPrefix = data.email?.split("@")[0] || "";
+    const firstName = data.firstName || data.firstName || emailPrefix || "";
+    const lastName = data.lastName || data.lastName || "";
+
+    const user = {
+      _id: data._id || data.id || "",
+      firstName,
+      lastName,
+      name: `${firstName} ${lastName}`.trim() || emailPrefix,
+      email: data.email || "",
+      role: data.role || "applicant",
+    };
+
+    localStorage.setItem("launchpad_token", data.token);
+    localStorage.setItem("launchpad_user", JSON.stringify(user));
+
+    redirectToDashboard(data.role);
+  } catch (error) {
+    showError(error.message);
   } finally {
     setLoading(false);
   }
 });
 
-// ── SOCIAL AUTH PLACEHOLDERS ──────────────────
+// ── SOCIAL AUTH ───────────────────────────────
 const [appleBtn, googleBtn] = document.querySelectorAll(".acc_icon div");
-
-appleBtn.addEventListener("click", () => {
-  // window.location.href = `${BASE_URL}/auth/apple`;
-  alert("Apple Sign-In coming soon!");
-});
-
-googleBtn.addEventListener("click", () => {
-  // window.location.href = `${BASE_URL}/auth/google`;
-  alert("Google Sign-In coming soon!");
-});
-
-// ── AUTO REDIRECT IF ALREADY LOGGED IN ────────
-// If a token already exists, skip sign in and go straight to dashboard
-
-(function checkExistingSession() {
-  const token = localStorage.getItem("launchpad_token");
-  const user = JSON.parse(localStorage.getItem("launchpad_user") || "null");
-
-  if (token && user) {
-    redirectToDashboard(user.role);
-  }
-})();
+appleBtn.addEventListener("click", () => alert("Apple Sign-In coming soon!"));
+googleBtn.addEventListener("click", () => alert("Google Sign-In coming soon!"));

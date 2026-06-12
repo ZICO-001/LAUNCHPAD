@@ -1,10 +1,8 @@
 // =============================================
 //  LaunchPad — Job Seeker SignUp Page JS
-//  Handles: animated page transition to
-//           Employer-signup.html on role switch
 // =============================================
 
-const BASE_URL = "https://your-api-domain.com/api";
+const BASE_URL = "https://lunchpad-backend-1.onrender.com/api";
 
 // ── ELEMENT REFS ──────────────────────────────
 const jobSeekerBtn = document.getElementById("jobSeekerBtn");
@@ -18,13 +16,11 @@ const passwordInput = document.getElementById("password");
 const termsCheckbox = document.getElementById("termsCheckbox");
 const signUpBtn = document.getElementById("signUpBtn");
 const signUpForm = document.getElementById("signUpForm");
-const passwordImg = document.querySelector(".password img");
 
 // ── SET JOB SEEKER AS ACTIVE BY DEFAULT ───────
 jobSeekerBtn.classList.add("active");
 
 // ── CHECK IF ARRIVING FROM EMPLOYER PAGE ──────
-// If so, animate in from the right
 window.addEventListener("DOMContentLoaded", () => {
   const from = sessionStorage.getItem("launchpad_nav_from");
   if (from === "employer") {
@@ -40,14 +36,13 @@ employerBtn.addEventListener("click", () => {
   container2.style.transform = "translateX(110%)";
   container2.style.opacity = "0";
 
-  // After animation completes, navigate to employer page
   setTimeout(() => {
     sessionStorage.setItem("launchpad_nav_from", "jobseeker");
     window.location.href = "Employer-signup.html";
   }, 920);
 });
 
-// Keep job seeker button active (already on this page)
+// Keep job seeker button active
 jobSeekerBtn.addEventListener("click", () => {
   jobSeekerBtn.classList.add("active");
   employerBtn.classList.remove("active");
@@ -120,40 +115,97 @@ function setLoading(loading) {
 
 // ── REGISTER API ──────────────────────────────
 // POST /api/auth/register
-// Body:    { first_name, last_name, email, password, role: "job_seeker" }
-// Success: { token, user: { id, email, role, first_name, last_name } }
+// Body:    { name, email, password, role }
+// Returns: { success, message, data: { token, name, email, role, _id } }
 
 async function registerUser(payload) {
   const res = await fetch(`${BASE_URL}/auth/register`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+    },
     body: JSON.stringify(payload),
   });
-  const data = await res.json();
-  if (!res.ok) throw new Error(data.message || "Registration failed.");
-  return data;
+
+  // Handle non-JSON responses (e.g. server HTML error pages)
+  const contentType = res.headers.get("content-type");
+  if (!contentType || !contentType.includes("application/json")) {
+    throw new Error("Server error. Please try again later.");
+  }
+
+  const json = await res.json();
+
+  if (!res.ok || !json.success) {
+    throw new Error(json.message || "Registration failed.");
+  }
+
+  console.log(json.data);
+  return json.data; // { token, name, email, role, _id }
 }
 
+// ── SIGN UP CLICK ──────────────────────────────
 signUpBtn.addEventListener("click", async () => {
   clearError();
   if (!validateForm()) return;
 
+  // Combine first + last name into one field for the backend
+  const fullName = `${firstNameInput.value.trim()} ${lastNameInput.value.trim()}`;
+  console.log(fullName);
+
   const payload = {
-    first_name: firstNameInput.value.trim(),
-    last_name: lastNameInput.value.trim(),
+    firstName: firstNameInput.value.trim(),
+    lastName: lastNameInput.value.trim(),
     email: emailInput.value.trim(),
     password: passwordInput.value,
-    role: "job_seeker",
+    role: "applicant", // backend expects "applicant" not "job_seeker"
   };
 
   setLoading(true);
   try {
     const data = await registerUser(payload);
+    console.log(data);
+    const name = data.name || "";
+    const parts = name.trim().split(" ");
+
+    const user = {
+      _id: data._id || data.id || "",
+      firstName: data.firstName || data.firstName || payload.firstName || "",
+      lastName: data.lastName || data.lastName || payload.lastName || "",
+      name:
+        data.name ||
+        `${payload.firstName || ""} ${payload.lastName || ""}`.trim(),
+      email: data.email || payload.email || "",
+      role: data.role || "applicant",
+    };
+
+    console.log(user);
+
     localStorage.setItem("launchpad_token", data.token);
-    localStorage.setItem("launchpad_user", JSON.stringify(data.user));
-    window.location.href = "JobSeekerDashboard.html";
+    localStorage.setItem("launchpad_user", JSON.stringify(user));
+
+    // Build full name from whatever we have
+    user.name = `${user.firstName} ${user.lastName}`.trim();
+
+    localStorage.setItem("launchpad_token", data.token);
+    localStorage.setItem("launchpad_user", JSON.stringify(user));
+
+    // Redirect based on role from backend response
+    if (data.role === "employer") {
+      window.location.href = "EmployerDashboard.html";
+    } else {
+      window.location.href = "JobSeeker-Dashboard.html";
+    }
   } catch (err) {
-    showError(err.message);
+    // Handle duplicate email specifically
+    if (
+      err.message.toLowerCase().includes("exist") ||
+      err.message.toLowerCase().includes("duplicate") ||
+      err.message.toLowerCase().includes("already")
+    ) {
+      showError("An account with this email already exists. Please sign in.");
+    } else {
+      showError(err.message);
+    }
   } finally {
     setLoading(false);
   }

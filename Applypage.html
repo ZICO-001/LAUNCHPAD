@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>JOB-SEEKER DASHBOARD</title>
+    <title>Apply For Job</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -13,45 +13,42 @@
     <link rel="stylesheet" href="Applypage.css" />
   </head>
   <body>
-    <!-- header -->
+    <!-- HEADER -->
     <header class="header">
       <div class="search-box">
         <img src="images/Browse-job-icon.png" alt="" />
         <input type="text" placeholder="Search jobs, companies or skills..." />
       </div>
-
       <div class="header-right">
         <img src="images/notification-icon.png" alt="" />
-
         <div class="user">
-          <div class="avatar">TA</div>
-
+          <div class="avatar" id="userAvatar">TA</div>
           <div>
-            <h5>Tunde Akinleye</h5>
+            <h5 id="userName">Tunde Akinleye</h5>
             <span>Job Seeker</span>
           </div>
         </div>
       </div>
     </header>
 
-    <!-- side bar -->
+    <!-- SIDEBAR -->
     <section class="sidebar">
       <div class="logo">
         <img src="images/launchpad logo.png" alt="" />
         <h1>LaunchPad</h1>
       </div>
       <nav class="navbar">
-        <div class="home">
+        <div class="home-nav">
           <img src="images/Home-icon.png" alt="" />
-          <a href="Job-Seeker.html">Home</a>
+          <a href="JobSeeker-Dashboard.html">Home</a>
         </div>
         <div class="browse">
           <img src="images/Browse-job-icon.png" alt="" />
-          <a href="#">Browse Job</a>
+          <a href="Browse-job.html">Browse Job</a>
         </div>
         <div class="Saved-job">
           <img src="images/saved-job-icon.png" alt="" />
-          <a href="#">Saved Jobs</a>
+          <a href="Saved-job.html">Saved Jobs</a>
         </div>
         <div class="My-Application">
           <img src="images/APPLICATION-icon.png" alt="" />
@@ -59,146 +56,338 @@
         </div>
         <div class="profile">
           <img src="images/profile-icon.png" alt="" />
-          <a href="#">Profile</a>
+          <a href="profile.html">Profile</a>
         </div>
       </nav>
-
       <div class="profile-card">
         <img src="images/progress-Icon.png" alt="" />
         <h4>Level up your profile</h4>
         <p>Complete your profile to get more interview calls.</p>
-
         <div class="progress-bar">
           <div class="progress"></div>
         </div>
         <div class="profile-progress">
-          <a href="#">Complete Profile </a>
-          <a href="">→</a>
+          <a href="profile.html">Complete Profile</a>
+          <a href="profile.html">→</a>
         </div>
       </div>
-      <div class="sidebar-bottom">
+      <div class="sidebar-bottom" id="logoutBtn">
         <img src="images/logout-Icon.png" alt="" />
         <p>Logout</p>
       </div>
     </section>
+
+    <!-- MAIN -->
     <main class="main">
-      <div class="Apply">
+      <!-- Page title + back arrow -->
+      <div class="Apply" id="backArrow">
         <img src="loginImages/arrow-icon.png" alt="" />
         <h2>Apply For Job</h2>
       </div>
+
+      <!-- Step indicators -->
       <section class="form-section">
         <div class="form-heading">
           <div class="nav-heading">
-            <div class="card-1">
-              <p class="num1">1</p>
-              <a href="">Confirm details</a>
+            <div class="card-1 step-card" id="stepCard1">
+              <p class="num" id="num1">1</p>
+              <a href="#">Confirm details</a>
             </div>
-            <!--  -->
-            <div class="card-2">
-              <p class="num2">2</p>
-              <a href="">Upload Resume</a>
+
+            <div class="card-2 step-card" id="stepCard2">
+              <p class="num" id="num2">2</p>
+              <a href="#">Upload Resume</a>
             </div>
-            <!--  -->
-            <div class="card-3">
-              <p class="num3">3</p>
-              <a href="#preview">Preview</a>
+
+            <div class="card-3 step-card" id="stepCard3">
+              <p class="num" id="num3">3</p>
+              <a href="#">Preview</a>
             </div>
           </div>
-          <!--  -->
 
-          <form action="">
-            <h2>Basic information</h2>
-            <div class="FullName">
-              <label for="text">Full Name</label>
-              <input type="email" name="" id="" placeholder="Tunde Adeleke" />
-            </div>
-            <!--  -->
-            <div class="email">
-              <label for="email">Email </label>
-              <input
-                type="email"
-                name=""
-                id=""
-                placeholder="tundeadeleke@gmail.com"
-              />
+          <!-- ── STEP 1: CONFIRM DETAILS ── -->
+          <div id="step1Content" class="step-content">
+            <form id="step1Form">
+              <h2>Basic information</h2>
+
+              <div class="FullName">
+                <label for="appFullName">Full Name</label>
+                <input
+                  type="text"
+                  id="appFullName"
+                  placeholder="Tunde Adeleke"
+                />
+              </div>
+
+              <div class="email">
+                <label for="appEmail">Email</label>
+                <input
+                  type="email"
+                  id="appEmail"
+                  placeholder="tundeadeleke@gmail.com"
+                />
+              </div>
+
+              <div class="Contact">
+                <label for="appPhone">Phone Number</label>
+                <input
+                  type="tel"
+                  id="appPhone"
+                  placeholder="+234 804 893 8444"
+                />
+              </div>
+
+              <div class="location">
+                <label for="appLocation">Location</label>
+                <input
+                  type="text"
+                  id="appLocation"
+                  placeholder="Lagos, Nigeria"
+                />
+              </div>
+
+              <div class="Profile-Link">
+                <label for="appProfileLink">Profile Link (Optional)</label>
+                <input type="text" id="appProfileLink" placeholder="" />
+              </div>
+
+              <div class="Linkedin-Profile">
+                <label for="appLinkedin">Linkedin Profile (Optional)</label>
+                <input type="text" id="appLinkedin" placeholder="" />
+              </div>
+            </form>
+
+            <p id="step1Error" class="error-msg"></p>
+            <button type="button" id="nextStepBtn" class="btn-primary">
+              Next Step →
+            </button>
+          </div>
+
+          <!-- ── STEP 2: UPLOAD RESUME ── -->
+          <div id="step2Content" class="step-content" style="display: none">
+            <div class="step-card-box">
+              <h2 class="step-box-title">Upload Your Resume</h2>
+              <p class="step-box-subtitle">
+                Choose an option below to add your resume
+              </p>
+
+              <!-- Saved resume (shown only if exists) -->
+              <div id="savedResumeSection" style="display: none">
+                <p class="section-label">SAVED RESUMES</p>
+                <div id="savedResumeCard" class="saved-resume-card">
+                  <div class="resume-icon">📄</div>
+                  <div>
+                    <p id="savedResumeTitle" class="resume-name"></p>
+                    <p class="resume-sub">Saved from your profile</p>
+                  </div>
+                  <div id="savedResumeCheck" class="resume-check"></div>
+                </div>
+              </div>
+
+              <p class="section-label">OR UPLOAD NEW RESUME</p>
+
+              <!-- Drop zone -->
+              <div id="dropZone" class="drop-zone">
+                <div class="drop-icon">📁</div>
+                <p class="drop-title">Drag and drop your file here</p>
+                <p class="drop-sub">PDF, DOC, DOCX (MAX 5MB)</p>
+                <button type="button" id="browseFilesBtn" class="btn-outline">
+                  Browse files
+                </button>
+                <input
+                  type="file"
+                  id="resumeFileInput"
+                  accept=".pdf,.doc,.docx"
+                  style="display: none"
+                />
+              </div>
+
+              <!-- Uploaded file tag -->
+              <div
+                id="uploadedFileTag"
+                class="uploaded-tag"
+                style="display: none"
+              >
+                <span>📎</span>
+                <span id="uploadedFileName"></span>
+                <span id="clearUploadBtn" class="clear-upload">✕</span>
+              </div>
+
+              <!-- Cover letter -->
+              <div class="cover-letter-wrap">
+                <label class="cover-label">
+                  Cover Letter <span class="optional-text">(Optional)</span>
+                </label>
+                <div class="cover-toolbar">
+                  <button type="button" class="toolbar-btn bold-btn">B</button>
+                  <button type="button" class="toolbar-btn italic-btn">
+                    I
+                  </button>
+                  <button type="button" class="toolbar-btn list-btn">☰</button>
+                </div>
+                <div
+                  id="coverLetterBox"
+                  class="cover-letter-box"
+                  contenteditable="true"
+                  data-placeholder="Write a short cover letter..."
+                ></div>
+              </div>
             </div>
 
-            <!--  -->
-            <div class="Contact">
-              <label for="number">Phone Number</label>
-              <input
-                type="number"
-                name=""
-                id=""
-                placeholder="+234 804 893 8444"
-              />
+            <p id="step2Error" class="error-msg"></p>
+
+            <div class="step-btn-row">
+              <button
+                type="button"
+                id="backToStep1Btn"
+                class="btn-outline-blue"
+              >
+                ← Back
+              </button>
+              <button type="button" id="toPreviewBtn" class="btn-primary wide">
+                Submit Application →
+              </button>
             </div>
-            <!--  -->
-            <div class="location">
-              <label for="location">Lagos, Nigeria</label>
-              <input type="text" name="" id="" placeholder="Lagos, Nigeria" />
+          </div>
+
+          <!-- ── STEP 3: PREVIEW ── -->
+          <div id="step3Content" class="step-content" style="display: none">
+            <div class="preview-banner">
+              <strong>Almost there.</strong> Review information before
+              submitting.
             </div>
-            <!--  -->
-            <div class="Profile-Link">
-              <label for="profile">Profile Link (Optional)</label>
-              <input type="" name="" id="" placeholder="" />
+
+            <div class="preview-row">
+              <!-- Review info card -->
+              <div class="review-card">
+                <h3 class="review-title">Review Information</h3>
+
+                <div class="review-field">
+                  <p class="review-label">Full Name</p>
+                  <div class="review-value" id="previewName"></div>
+                </div>
+                <div class="review-field">
+                  <p class="review-label">Email</p>
+                  <div class="review-value" id="previewEmail"></div>
+                </div>
+                <div class="review-field">
+                  <p class="review-label">Phone Number</p>
+                  <div class="review-value" id="previewPhone"></div>
+                </div>
+                <div class="review-field">
+                  <p class="review-label">Location</p>
+                  <div class="review-value" id="previewLocation"></div>
+                </div>
+                <div class="review-field">
+                  <p class="review-label">Resume</p>
+                  <div class="review-value resume-row">
+                    <span id="previewResume"></span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Application summary card -->
+              <div class="summary-card">
+                <h3 class="summary-title">Application Summary</h3>
+
+                <div class="summary-job-row">
+                  <div class="summary-job-logo" id="summaryJobLogo"></div>
+                  <div>
+                    <p class="summary-job-title" id="summaryJobTitle"></p>
+                    <p class="summary-job-sub" id="summaryJobSub"></p>
+                  </div>
+                </div>
+
+                <div class="summary-divider"></div>
+
+                <p class="summary-section-label">APPLICANT</p>
+                <p class="summary-value bold" id="summaryApplicantName"></p>
+                <p class="summary-value muted" id="summaryApplicantEmail"></p>
+
+                <p class="summary-section-label mt">PHONE</p>
+                <p class="summary-value" id="summaryPhone"></p>
+
+                <p class="summary-section-label mt">RESUME</p>
+                <p class="summary-value blue" id="summaryResume"></p>
+
+                <p class="summary-section-label mt">COVER NOTE</p>
+                <p class="summary-value" id="summaryCoverNote"></p>
+              </div>
             </div>
-            <!--  -->
-            <div class="Linkedin-Profile">
-              <label for="profile">Linkedin Profile (Optional)</label>
-              <input type="" name="" id="" placeholder="" />
+
+            <div class="step-btn-center">
+              <button
+                type="button"
+                id="backToStep2Btn"
+                class="btn-outline-blue"
+              >
+                ← Back
+              </button>
+              <button type="button" id="submitAppBtn" class="btn-primary wide">
+                Submit Application →
+              </button>
             </div>
-          </form>
-          <button type="button">Next Step →</button>
+          </div>
+
+          <!-- ── STEP 4: SUCCESS ── -->
+          <div id="step4Content" class="step-content" style="display: none">
+            <div class="success-card">
+              <div class="success-check">✓</div>
+
+              <h2 class="success-title">Application Sent!</h2>
+              <p class="success-sub" id="successMessage"></p>
+
+              <div class="next-steps-box">
+                <p class="next-steps-heading">ℹ What happens next?</p>
+                <ol class="next-steps-list">
+                  <li>
+                    The employer will review your application and portfolio.
+                  </li>
+                  <li>
+                    You will receive updates via email or your LaunchPad
+                    dashboard.
+                  </li>
+                  <li>
+                    You can track your real-time application status in "My
+                    Applications".
+                  </li>
+                </ol>
+              </div>
+
+              <div class="success-summary-row">
+                <div class="success-summary-item">
+                  <p class="success-summary-label">Role</p>
+                  <p class="success-summary-value" id="successRole"></p>
+                </div>
+                <div class="success-summary-item">
+                  <p class="success-summary-label">Company</p>
+                  <p class="success-summary-value" id="successCompany"></p>
+                </div>
+                <div class="success-summary-item">
+                  <p class="success-summary-label">Applied Date</p>
+                  <p class="success-summary-value" id="successDate"></p>
+                </div>
+              </div>
+
+              <div class="success-btn-row">
+                <button
+                  type="button"
+                  id="viewApplicationsBtn"
+                  class="btn-outline-blue"
+                >
+                  👁 View My Applications
+                </button>
+                <button type="button" id="browseMoreBtn" class="btn-primary">
+                  🔍 Browse More Jobs
+                </button>
+              </div>
+            </div>
+          </div>
+          <!-- end step 4 -->
         </div>
       </section>
-
-      <section id="Preiew">
-        <form action="" class="Preview">
-          <h2>Basic information</h2>
-          <div class="FullNam">
-            <label for="text">Full Name</label>
-            <input type="email" name="" id="" placeholder="Tunde Adeleke" />
-          </div>
-          <!--  -->
-          <div class="Email">
-            <label for="email">Email </label>
-            <input
-              type="email"
-              name=""
-              id=""
-              placeholder="tundeadeleke@gmail.com"
-            />
-          </div>
-
-          <!--  -->
-          <div class="contact">
-            <label for="number">Phone Number</label>
-            <input
-              type="number"
-              name=""
-              id=""
-              placeholder="+234 804 893 8444"
-            />
-          </div>
-          <!--  -->
-          <div class="location">
-            <label for="location">Lagos, Nigeria</label>
-            <input type="text" name="" id="" placeholder="Lagos, Nigeria" />
-          </div>
-          <!--  -->
-          <div class="Profile-Link">
-            <label for="profile">Profile Link (Optional)</label>
-            <input type="" name="" id="" placeholder="" />
-          </div>
-          <!--  -->
-          <div class="Linkedin-Profile">
-            <label for="profile">Linkedin Profile (Optional)</label>
-            <input type="" name="" id="" placeholder="" />
-          </div>
-        </form>
-        <button type="button">Sumbit Application →</button>
-      </section>
     </main>
+
+    <script src="Applypage.js"></script>
   </body>
 </html>

@@ -3,8 +3,7 @@
 //  Handles: animated page transition back to
 //           SignUp.html on role switch
 // =============================================
-
-const BASE_URL = "https://your-api-domain.com/api";
+const BASE_URL = "https://lunchpad-backend-1.onrender.com/api";
 
 // ── ELEMENT REFS ──────────────────────────────
 const jobSeekerBtn = document.getElementById("jobSeekerBtn");
@@ -24,7 +23,6 @@ const signUpForm = document.getElementById("signUpForm");
 employerBtn.classList.add("active");
 
 // ── CHECK IF ARRIVING FROM JOB SEEKER PAGE ────
-// Animate in from the right when coming from SignUp.html
 window.addEventListener("DOMContentLoaded", () => {
   const from = sessionStorage.getItem("launchpad_nav_from");
   if (from === "jobseeker") {
@@ -35,12 +33,6 @@ window.addEventListener("DOMContentLoaded", () => {
 
 // ── SWITCH TO JOB SEEKER (animated exit) ──────
 jobSeekerBtn.addEventListener("click", () => {
-  // Slide panels out to the right
-  //   container1.style.transition =
-  //     "transform 0.5s cubic-bezier(0.77,0,0.18,1), opacity 0.5s ease";
-  //   container2.style.transition =
-  //     "transform 0.5s cubic-bezier(0.77,0,0.18,1), opacity 0.5s ease";
-
   container1.style.transform = "translateX(110%)";
   container1.style.opacity = "0";
   container2.style.transform = "translateX(-110%)";
@@ -91,27 +83,33 @@ function clearError() {
 }
 
 function validateForm() {
-  if (!firstNameInput.value.trim()) {
+  const firstName = firstNameInput.value.trim();
+  const lastName = lastNameInput.value.trim();
+  const email = emailInput.value.trim();
+  const role = roleInput.value.trim();
+  const password = passwordInput.value;
+
+  if (!firstName) {
     showError("Please enter your first name.");
     firstNameInput.focus();
     return false;
   }
-  if (!lastNameInput.value.trim()) {
+  if (!lastName) {
     showError("Please enter your last name.");
     lastNameInput.focus();
     return false;
   }
-  if (!isValidEmail(emailInput.value.trim())) {
+  if (!isValidEmail(email)) {
     showError("Please enter a valid email address.");
     emailInput.focus();
     return false;
   }
-  if (!roleInput.value.trim()) {
+  if (!role) {
     showError("Please enter your role e.g HR Manager, Recruiter.");
     roleInput.focus();
     return false;
   }
-  if (!passwordInput.value || passwordInput.value.length < 8) {
+  if (!password || password.length < 8) {
     showError("Password must be at least 8 characters.");
     passwordInput.focus();
     return false;
@@ -129,10 +127,6 @@ function setLoading(loading) {
 }
 
 // ── REGISTER API ──────────────────────────────
-// POST /api/auth/register
-// Body:    { first_name, last_name, email, password, role: "employer", user_role }
-// Success: { token, user: { id, email, role, first_name, last_name } }
-
 async function registerUser(payload) {
   const res = await fetch(`${BASE_URL}/auth/register`, {
     method: "POST",
@@ -144,6 +138,40 @@ async function registerUser(payload) {
   return data;
 }
 
+// ── LOCAL SAVE FALLBACK ───────────────────────
+function registerLocally(payload) {
+  const existingUsers = JSON.parse(
+    localStorage.getItem("launchpad_users") || "[]",
+  );
+
+  const emailTaken = existingUsers.find((u) => u.email === payload.email);
+  if (emailTaken) {
+    throw new Error(
+      "An account with this email already exists. Please sign in.",
+    );
+  }
+
+  const newUser = {
+    id: Date.now().toString(),
+    first_name: payload.first_name,
+    last_name: payload.last_name,
+    name: `${payload.first_name} ${payload.last_name}`,
+    email: payload.email,
+    password: payload.password,
+    role: "employer",
+    user_role: payload.user_role,
+  };
+
+  existingUsers.push(newUser);
+  localStorage.setItem("launchpad_users", JSON.stringify(existingUsers));
+
+  return {
+    token: "local-token-" + newUser.id,
+    user: newUser,
+  };
+}
+
+// ── SIGN UP CLICK ─────────────────────────────
 signUpBtn.addEventListener("click", async () => {
   clearError();
   if (!validateForm()) return;
@@ -159,12 +187,21 @@ signUpBtn.addEventListener("click", async () => {
 
   setLoading(true);
   try {
+    // Try real API first
     const data = await registerUser(payload);
     localStorage.setItem("launchpad_token", data.token);
     localStorage.setItem("launchpad_user", JSON.stringify(data.user));
     window.location.href = "EmployerDashboard.html";
   } catch (err) {
-    showError(err.message);
+    // API unavailable — fall back to localStorage
+    try {
+      const data = registerLocally(payload);
+      localStorage.setItem("launchpad_token", data.token);
+      localStorage.setItem("launchpad_user", JSON.stringify(data.user));
+      window.location.href = "EmployerDashboard.html";
+    } catch (localErr) {
+      showError(localErr.message);
+    }
   } finally {
     setLoading(false);
   }
